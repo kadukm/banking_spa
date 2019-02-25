@@ -1,0 +1,37 @@
+{
+  "name": "banking_spa",
+  "version": "0.1.0",
+  "description": "Simple Single Page Application on Golang+React",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack && exit 0",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadukm/banking_spa.git"
+  },
+  "author": "Mikhail Kaduk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadukm/banking_spa/issues"
+  },
+  "homepage": "https://github.com/kadukm/banking_spa#readme",
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
