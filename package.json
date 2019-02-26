@@ -1,7 +1,7 @@
 {
   "name": "banking_spa",
   "version": "0.1.0",
-  "description": "Simple Single Page Application on Golang+React",
+  "description": "Simple single-page application written on Golang+React",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/kadukm/banking_spa#readme",
   "dependencies": {
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
