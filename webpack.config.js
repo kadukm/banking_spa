@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './index.jsx',
+  entry: './client/index.jsx',
   devtool: "source-map",
   output: {
     filename: 'bundle.js',
@@ -14,6 +14,10 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.css$/,
+        loader: ['style-loader', 'css-loader']
       }
     ]
   }
