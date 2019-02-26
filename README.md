@@ -1,2 +1,2 @@
 # banking_spa
-Simple Single Page Application on Golang+React
+Simple single-page application written on Golang+React
