@@ -16,6 +16,9 @@ export default class App extends React.Component {
                         path="/companies/:companyId"
                         component={Company}
                     />
+                    <Route
+                        component={() => <div>Wrong URL!</div>}
+                    />
                 </Switch>
             </BrowserRouter>
         );
