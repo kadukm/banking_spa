@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AdminPanel from './AdminPanel.jsx'
+import Company from './Company.jsx'
 import '../styles/App.css'
 
 export default class App extends React.Component {
@@ -9,13 +11,10 @@ export default class App extends React.Component {
                 <Switch>
                     <Route
                         path="/admin-panel"
-                        component={() => <div>Hello, Admin!</div>} />
+                        component={AdminPanel} />
                     <Route
                         path="/companies/:companyId"
-                        component={({ match }) => <div>Info about {match.params.companyId}!</div>}
-                    />
-                    <Route
-                        component={() => <div>Default</div>}
+                        component={Company}
                     />
                 </Switch>
             </BrowserRouter>
