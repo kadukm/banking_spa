@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import AdminPanel from './AdminPanel.jsx'
-import Company from './Company.jsx'
+import AdminPanel from './admin-panel/AdminPanel.jsx'
+import Company from './company/Company.jsx'
 import '../styles/App.css'
 
 export default class App extends React.Component {
