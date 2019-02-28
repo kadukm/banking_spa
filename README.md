@@ -16,7 +16,7 @@ POST `/api/payments/from_card`
 }
 ```
 
-GET `/api/payments/via_bank`
+POST `/api/payments/via_bank`
 ```
 {
     inn: "1234567890"                      | str, 10 or 12 digits
