@@ -41,7 +41,7 @@ POST `/api/payments/requests`
 PATCH `/api/payments/from_card/:paymentId`
 ```
 {
-    safe: false      | bool
+    dangerous: true      | bool
 }
 ```
 
