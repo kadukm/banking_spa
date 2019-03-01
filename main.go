@@ -1,19 +1,56 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/kadukm/banking_spa/server/handling"
+)
 
 func main() {
-	r := gin.Default()
-
-	r.Static("/dist", "./dist")
-	r.StaticFile("/admin-panel", "./index.html")
-	r.StaticFile("/", "./index.html")
-	r.GET("/companies/:companyId", indexHandler)
-	r.HEAD("/companies/:companyId", indexHandler)
-
-	r.Run()
+	engine := gin.Default()
+	buildCommonRoutes(engine)
+	buildAPIRoutes(engine)
+	engine.Run()
 }
 
-func indexHandler(c *gin.Context) {
-	c.File("./index.html")
+func buildCommonRoutes(engine *gin.Engine) {
+	indexHandler := func(c *gin.Context) {
+		c.File("./index.html")
+	}
+	engine.Static("/dist", "./dist")
+	engine.StaticFile("/admin-panel", "./index.html")
+	engine.StaticFile("/", "./index.html")
+	engine.GET("/companies/:companyId", indexHandler)
+	engine.HEAD("/companies/:companyId", indexHandler)
+}
+
+func buildAPIRoutes(engine *gin.Engine) {
+	t := testS{text: "heh"}
+	api := engine.Group("/api")
+	{
+		payments := api.Group("/payments")
+		{
+			payments.POST("/from_card", handling.PostPaymentFromCard)
+			payments.POST("/requests", handling.PostPaymentRequest)
+			payments.POST("/via_bank", handling.PostPaymentViaBank)
+			payments.PATCH("/from_card/:paymentId", handling.PatchPaymentFromCard)
+		}
+		companies := api.Group("/companies")
+		{
+			companies.GET("/:companyId", t.DoSmth)
+		}
+	}
+}
+
+func test(c *gin.Context) {
+	c.String(http.StatusOK, "hello world")
+}
+
+type testS struct {
+	text string
+}
+
+func (t testS) DoSmth(c *gin.Context) {
+	c.String(http.StatusOK, "hello world from "+t.text)
 }
