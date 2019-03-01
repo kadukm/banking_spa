@@ -1,7 +1,7 @@
 {
   "name": "banking_spa",
   "version": "0.1.0",
-  "description": "Simple single-page application written on Golang+React",
+  "description": "Simple single-page application written on Golang+MongoDB+React",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

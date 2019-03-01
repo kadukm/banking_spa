@@ -1,5 +1,5 @@
 # banking_spa
-Simple single-page application written on Golang+React
+Simple single-page application written on Golang+MongoDB+React
 
 ## backend API
 POST `/api/payments/from_card`
