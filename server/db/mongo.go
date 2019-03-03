@@ -21,19 +21,19 @@ func init() {
 	paymentRequests = *db.Collection("payment-requests")
 }
 
-func AddNewPaymentFromCard(payment utils.PaymentFromCard) {
+func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) {
 	payment.ID = generatorForPaymentsFromCard()
 	paymentsFromCard.InsertOne(context.TODO(), payment)
 }
 
-func AddNewPaymentRequest(request utils.PaymentRequest) {
+func AddNewPaymentRequest(request utils.PaymentRequestDTO) {
 	request.ID = generatorForPaymentsRequests()
 	paymentRequests.InsertOne(context.TODO(), request)
 }
 
 func PatchPaymentFromCard(patch utils.PaymentFromCardPatch, paymentId uint64) {
 	filter := bson.D{{"id", paymentId}}
-	var payment utils.PaymentFromCard
+	var payment utils.PaymentFromCardDTO
 	paymentsFromCard.FindOne(context.TODO(), filter).Decode(&payment)
 	update := bson.D{
 		{"$set", bson.D{{"dangerous", true}}},

@@ -8,7 +8,7 @@ import (
 )
 
 func PostPaymentViaBank(c *gin.Context) {
-	request := utils.PaymentRequest{}
+	request := utils.PaymentRequestDTO{}
 	if err := c.ShouldBindJSON(&request); err == nil {
 		//TODO: check all fields
 		//TODO: send real pdf

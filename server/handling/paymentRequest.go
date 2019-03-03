@@ -9,7 +9,7 @@ import (
 )
 
 func PostPaymentRequest(c *gin.Context) {
-	request := utils.PaymentRequest{}
+	request := utils.PaymentRequestDTO{}
 	if err := c.ShouldBindJSON(&request); err == nil {
 		//TODO: check all fields
 		db.AddNewPaymentRequest(request)

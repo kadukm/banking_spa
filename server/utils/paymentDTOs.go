@@ -1,6 +1,6 @@
 package utils
 
-type PaymentFromCard struct {
+type PaymentFromCardDTO struct {
 	ID          uint64 `json:"id"`
 	CardNumber  string `json:"card_number"`
 	CardExpires string `json:"card_expires"`
@@ -11,7 +11,7 @@ type PaymentFromCard struct {
 	Dangerous   bool   `json:"dangerous"`
 }
 
-type PaymentRequest struct {
+type PaymentRequestDTO struct {
 	ID            uint64 `json:"id"`
 	Inn           int    `json:"inn"`
 	Bik           int    `json:"bik"`
@@ -22,7 +22,7 @@ type PaymentRequest struct {
 	Email         string `json:"email"`
 }
 
-type PaymentViaBank struct {
+type PaymentViaBankDTO struct {
 	Inn           int    `json:"inn"`
 	Bik           int    `json:"bik"`
 	AccountNumber string `json:"account_number"`

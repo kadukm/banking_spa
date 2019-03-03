@@ -10,7 +10,7 @@ import (
 )
 
 func PostPaymentFromCard(c *gin.Context) {
-	payment := utils.PaymentFromCard{}
+	payment := utils.PaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&payment); err == nil {
 		//TODO: check all fields
 		db.AddNewPaymentFromCard(payment)
