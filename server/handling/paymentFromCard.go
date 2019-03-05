@@ -2,7 +2,6 @@ package handling
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/db"
@@ -21,9 +20,8 @@ func PostPaymentFromCard(c *gin.Context) {
 }
 
 func PatchPaymentFromCard(c *gin.Context) {
-	paymentIDstr := c.Param("paymentId")
-	paymentID, _ := strconv.ParseUint(paymentIDstr, 10, 64)
-	patch := utils.PaymentFromCardPatch{}
+	paymentID := c.Param("paymentId")
+	patch := utils.PatchPaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&patch); err == nil {
 		db.PatchPaymentFromCard(patch, paymentID)
 		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
