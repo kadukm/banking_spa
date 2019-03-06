@@ -13,12 +13,14 @@ import (
 
 var paymentsFromCard mongo.Collection
 var paymentRequests mongo.Collection
+var companies mongo.Collection
 
 func init() {
 	client, _ := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	db := client.Database("banking-spa-testing")
 	paymentsFromCard = *db.Collection("payments-from-card")
 	paymentRequests = *db.Collection("payment-requests")
+	companies = *db.Collection("companies")
 }
 
 func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) error {
@@ -41,5 +43,15 @@ func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string)
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": patch}
 	_, err = paymentsFromCard.UpdateOne(context.TODO(), filter, update)
+	return
+}
+
+func GetCompany(companyID string) (res utils.CompanyDTO, err error) {
+	filter := bson.M{"_id": companyID}
+	companyInstance := company{}
+	if err = companies.FindOne(context.TODO(), filter).Decode(&companyInstance); err != nil {
+		return
+	}
+	res = companyInstance.convertToCompanyDTO()
 	return
 }

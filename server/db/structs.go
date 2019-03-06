@@ -23,3 +23,15 @@ type paymentRequest struct {
 	Phone         string             `bson:"phone"`
 	Email         string             `bson:"email"`
 }
+
+type company struct {
+	ID             string `bson:"_id"`
+	Status         string `bson:"status"`
+	Name           string `bson:"name"`
+	PhotoPath      string `bson:"photo_path"`
+	Phone          string `bson:"phone"`
+	Site           string `bson:"site"`
+	Email          string `bson:"email"`
+	FullInfoPath   string `bson:"full_info_path"`
+	RequisitesPath string `bson:"requisites_path"`
+}

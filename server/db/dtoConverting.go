@@ -27,3 +27,16 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 		Email:         payment.Email,
 	}
 }
+
+func (company_ company) convertToCompanyDTO() utils.CompanyDTO {
+	return utils.CompanyDTO{
+		Status:         company_.Status,
+		Name:           company_.Name,
+		PhotoPath:      company_.PhotoPath,
+		Phone:          company_.Phone,
+		Site:           company_.Site,
+		Email:          company_.Email,
+		FullInfoPath:   company_.FullInfoPath,
+		RequisitesPath: company_.RequisitesPath,
+	}
+}
