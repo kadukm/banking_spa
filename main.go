@@ -1,13 +1,20 @@
 package main
 
 import (
+	"flag"
+
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/handling"
 )
 
 func main() {
-	useCommonEngine := true
-	if useCommonEngine {
+	dev := flag.Bool("dev", false, "a bool")
+	flag.Parse()
+
+	if *dev {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
 		go runCommonEngine()
 	}
 	runAPIEngine()
