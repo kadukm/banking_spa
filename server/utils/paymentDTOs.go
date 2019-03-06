@@ -13,8 +13,8 @@ type PaymentFromCardDTO struct {
 
 type PaymentRequestDTO struct {
 	ID            string `json:"id"`
-	Inn           string `json:"inn"`
-	Bik           string `json:"bik"`
+	INN           string `json:"inn"`
+	BIK           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
 	Value         int    `json:"value"`
@@ -23,8 +23,8 @@ type PaymentRequestDTO struct {
 }
 
 type PaymentViaBankDTO struct {
-	Inn           string `json:"inn"`
-	Bik           string `json:"bik"`
+	INN           string `json:"inn"`
+	BIK           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
 	Value         int    `json:"value"`

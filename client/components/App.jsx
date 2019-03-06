@@ -13,7 +13,7 @@ export default class App extends React.Component {
                         path="/admin-panel"
                         component={AdminPanel} />
                     <Route
-                        path="/companies/:companyId"
+                        path="/companies/:companyID"
                         component={Company}
                     />
                     <Route

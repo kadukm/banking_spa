@@ -38,7 +38,7 @@ POST `/api/payments/requests`
 }
 ```
 
-PATCH `/api/payments/from_card/:paymentId`
+PATCH `/api/payments/from_card/:paymentID`
 ```
 {
     dangerous: true      | bool
@@ -53,4 +53,4 @@ GET `/api/payments/from_card?field=<field_name>&desc=<bool_value>`
 
 GET `/api/payments/requests?field=<field_name>&desc=<bool_value>`
 
-GET `/api/copmanies/:companyId`
+GET `/api/copmanies/:companyID`

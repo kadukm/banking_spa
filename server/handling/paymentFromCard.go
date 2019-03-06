@@ -27,7 +27,7 @@ func PostPaymentFromCard(c *gin.Context) {
 }
 
 func PatchPaymentFromCard(c *gin.Context) {
-	paymentID := c.Param("paymentId")
+	paymentID := c.Param("paymentID")
 	patch := utils.PatchPaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&patch); err != nil {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})

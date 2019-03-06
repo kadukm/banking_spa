@@ -18,8 +18,8 @@ func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) paymentFromCard 
 
 func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 	return paymentRequest{
-		Inn:           payment.Inn,
-		Bik:           payment.Bik,
+		INN:           payment.INN,
+		BIK:           payment.BIK,
 		AccountNumber: payment.AccountNumber,
 		ForWhat:       payment.ForWhat,
 		Value:         payment.Value,

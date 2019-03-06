@@ -29,8 +29,8 @@ func PostPaymentRequest(c *gin.Context) {
 
 func paymentRequestIsRight(request utils.PaymentRequestDTO) bool {
 	return utils.IDIsRight(request.ID) &&
-		utils.InnIsRight(request.Inn) &&
-		utils.BikIsRight(request.Bik) &&
+		utils.INNIsRight(request.INN) &&
+		utils.BIKIsRight(request.BIK) &&
 		utils.AccountNumberIsRight(request.AccountNumber) &&
 		utils.ForWhatIsRight(request.ForWhat) &&
 		utils.ValueIsRight(request.Value) &&

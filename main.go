@@ -19,8 +19,8 @@ func buildCommonRoutes(engine *gin.Engine) {
 	engine.Static("/dist", "./dist")
 	engine.StaticFile("/admin-panel", "./index.html")
 	engine.StaticFile("/", "./index.html")
-	engine.GET("/companies/:companyId", indexHandler)
-	engine.HEAD("/companies/:companyId", indexHandler)
+	engine.GET("/companies/:companyID", indexHandler)
+	engine.HEAD("/companies/:companyID", indexHandler)
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
@@ -31,11 +31,11 @@ func buildAPIRoutes(engine *gin.Engine) {
 			payments.POST("/from_card", handling.PostPaymentFromCard)
 			payments.POST("/requests", handling.PostPaymentRequest)
 			payments.POST("/via_bank", handling.PostPaymentViaBank)
-			payments.PATCH("/from_card/:paymentId", handling.PatchPaymentFromCard)
+			payments.PATCH("/from_card/:paymentID", handling.PatchPaymentFromCard)
 		}
 		companies := api.Group("/companies")
 		{
-			companies.GET("/:companyId", handling.GetCompany)
+			companies.GET("/:companyID", handling.GetCompany)
 		}
 	}
 }

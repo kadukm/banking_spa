@@ -12,12 +12,12 @@ func IDIsRight(id string) bool {
 	return id == ""
 }
 
-func InnIsRight(inn string) bool {
+func INNIsRight(inn string) bool {
 	innLength := len(inn)
 	return (innLength == 10 || innLength == 12) && stringContainsOnlyDigits(inn)
 }
 
-func BikIsRight(bik string) bool {
+func BIKIsRight(bik string) bool {
 	bikLength := len(bik)
 	return bikLength == 9 && stringContainsOnlyDigits(bik)
 }

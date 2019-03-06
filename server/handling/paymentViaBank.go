@@ -22,8 +22,8 @@ func PostPaymentViaBank(c *gin.Context) {
 }
 
 func paymentViaBankIsRIght(payment utils.PaymentViaBankDTO) bool {
-	return utils.InnIsRight(payment.Inn) &&
-		utils.BikIsRight(payment.Bik) &&
+	return utils.INNIsRight(payment.INN) &&
+		utils.BIKIsRight(payment.BIK) &&
 		utils.AccountNumberIsRight(payment.AccountNumber) &&
 		utils.ForWhatIsRight(payment.ForWhat) &&
 		utils.ValueIsRight(payment.Value)
