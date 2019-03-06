@@ -3,9 +3,21 @@ package handling
 import (
 	"net/http"
 
+	"github.com/kadukm/banking_spa/server/utils"
+
 	"github.com/gin-gonic/gin"
 )
 
 func GetCompany(c *gin.Context) {
-	c.String(http.StatusOK, "not implemented yet")
+	company := utils.CompanyDTO{
+		Status:         "Индивидуальный предпрениматель",
+		Name:           "Швецова Мария Валерьевна",
+		PhotoPath:      "/static/images/test_photo.jpg",
+		Phone:          "+79998887766",
+		Site:           "www.mary.com",
+		Email:          "mary@tochka.ru",
+		FullInfoPath:   "#",
+		RequisitesPath: "#",
+	}
+	c.JSON(http.StatusOK, company)
 }
