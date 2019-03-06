@@ -15,8 +15,8 @@ type paymentFromCard struct {
 
 type paymentRequest struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty"`
-	Inn           int                `bson:"inn"`
-	Bik           int                `bson:"bik"`
+	Inn           string             `bson:"inn"`
+	Bik           string             `bson:"bik"`
 	AccountNumber string             `bson:"account_number"`
 	ForWhat       string             `bson:"for_what"`
 	Value         int                `bson:"value"`

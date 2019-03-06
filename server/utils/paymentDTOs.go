@@ -1,7 +1,7 @@
 package utils
 
 type PaymentFromCardDTO struct {
-	ID          string `json:"_id"`
+	ID          string `json:"id"`
 	CardNumber  string `json:"card_number"`
 	CardExpires string `json:"card_expires"`
 	CardCVC     int    `json:"card_cvc"`
@@ -12,9 +12,9 @@ type PaymentFromCardDTO struct {
 }
 
 type PaymentRequestDTO struct {
-	ID            string `json:"_id"`
-	Inn           int    `json:"inn"`
-	Bik           int    `json:"bik"`
+	ID            string `json:"id"`
+	Inn           string `json:"inn"`
+	Bik           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
 	Value         int    `json:"value"`
@@ -23,8 +23,8 @@ type PaymentRequestDTO struct {
 }
 
 type PaymentViaBankDTO struct {
-	Inn           int    `json:"inn"`
-	Bik           int    `json:"bik"`
+	Inn           string `json:"inn"`
+	Bik           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
 	Value         int    `json:"value"`

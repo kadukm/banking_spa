@@ -28,8 +28,8 @@ POST `/api/payments/via_bank`
 POST `/api/payments/requests`
 ```
 {
-    inn: 1234567890                        | int, 10 or 12 digits
-    bik: 123456789                         | int, 9 digits
+    inn: 1234567890                        | str, 10 or 12 digits
+    bik: 123456789                         | str, 9 digits
     account_number: "12345678901234567890" | str, 20 digits
     for_what: "без НДС"                    | str, "без НДС" or "НДС 10%" or "НДС 18%"
     value: 7777                            | int, between 1000 and 75000
