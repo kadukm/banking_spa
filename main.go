@@ -1,8 +1,6 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/handling"
 )
@@ -26,7 +24,6 @@ func buildCommonRoutes(engine *gin.Engine) {
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
-	t := testS{text: "heh"}
 	api := engine.Group("/api")
 	{
 		payments := api.Group("/payments")
@@ -38,19 +35,7 @@ func buildAPIRoutes(engine *gin.Engine) {
 		}
 		companies := api.Group("/companies")
 		{
-			companies.GET("/:companyId", t.DoSmth)
+			companies.GET("/:companyId", handling.GetCompanyInfo)
 		}
 	}
-}
-
-func test(c *gin.Context) {
-	c.String(http.StatusOK, "hello world")
-}
-
-type testS struct {
-	text string
-}
-
-func (t testS) DoSmth(c *gin.Context) {
-	c.String(http.StatusOK, "hello world from "+t.text)
 }
