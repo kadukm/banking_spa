@@ -10,7 +10,7 @@ import (
 
 func GetCompany(c *gin.Context) {
 	company := utils.CompanyDTO{
-		Status:         "Индивидуальный предпрениматель",
+		Status:         "Индивидуальный предприниматель",
 		Name:           "Швецова Мария Валерьевна",
 		PhotoPath:      "/static/images/test_photo.jpg",
 		Phone:          "+79998887766",
