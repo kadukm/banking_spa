@@ -22,6 +22,4 @@ export default class Body extends React.Component {
             </div>
         )
     }
-
-
 }
