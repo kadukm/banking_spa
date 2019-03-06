@@ -22,11 +22,15 @@ func init() {
 }
 
 func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) {
-	paymentsFromCard.InsertOne(context.TODO(), payment)
+	if res, err := convertToPaymentFromCard(payment); err == nil {
+		paymentsFromCard.InsertOne(context.TODO(), res)
+	}
 }
 
 func AddNewPaymentRequest(request utils.PaymentRequestDTO) {
-	paymentRequests.InsertOne(context.TODO(), request)
+	if res, err := convertToPaymentRequest(request); err == nil {
+		paymentRequests.InsertOne(context.TODO(), res)
+	}
 }
 
 func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string) {
