@@ -9,7 +9,7 @@ export default class Company extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header companyID={this.props.match.params.companyID}/>
                 <Delimiter />
                 <Body />
                 <Delimiter />
