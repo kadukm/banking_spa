@@ -1,16 +1,11 @@
 package db
 
 import (
-	"errors"
-
 	"github.com/kadukm/banking_spa/server/utils"
 )
 
-func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) (res paymentFromCard, err error) {
-	if payment.ID != "" {
-		return res, errors.New("Given not empty ID of payment from card")
-	}
-	res = paymentFromCard{
+func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) paymentFromCard {
+	return paymentFromCard{
 		CardNumber:  payment.CardNumber,
 		CardExpires: payment.CardExpires,
 		CardCVC:     payment.CardCVC,
@@ -19,14 +14,10 @@ func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) (res paymentFrom
 		Email:       payment.Email,
 		Dangerous:   payment.Dangerous,
 	}
-	return res, nil
 }
 
-func convertToPaymentRequest(payment utils.PaymentRequestDTO) (res paymentRequest, err error) {
-	if payment.ID != "" {
-		return res, errors.New("Given not empty ID of payment request")
-	}
-	res = paymentRequest{
+func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
+	return paymentRequest{
 		Inn:           payment.Inn,
 		Bik:           payment.Bik,
 		AccountNumber: payment.AccountNumber,
@@ -35,5 +26,4 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) (res paymentReques
 		Phone:         payment.Phone,
 		Email:         payment.Email,
 	}
-	return res, nil
 }

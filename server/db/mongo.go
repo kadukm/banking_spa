@@ -21,21 +21,25 @@ func init() {
 	paymentRequests = *db.Collection("payment-requests")
 }
 
-func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) {
-	if res, err := convertToPaymentFromCard(payment); err == nil {
-		paymentsFromCard.InsertOne(context.TODO(), res)
-	}
+func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) error {
+	res := convertToPaymentFromCard(payment)
+	_, err := paymentsFromCard.InsertOne(context.TODO(), res)
+	return err
 }
 
-func AddNewPaymentRequest(request utils.PaymentRequestDTO) {
-	if res, err := convertToPaymentRequest(request); err == nil {
-		paymentRequests.InsertOne(context.TODO(), res)
-	}
+func AddNewPaymentRequest(request utils.PaymentRequestDTO) error {
+	res := convertToPaymentRequest(request)
+	_, err := paymentRequests.InsertOne(context.TODO(), res)
+	return err
 }
 
-func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string) {
-	objectID, _ := primitive.ObjectIDFromHex(paymentID)
+func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string) (err error) {
+	objectID, err := primitive.ObjectIDFromHex(paymentID)
+	if err != nil {
+		return
+	}
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": patch}
-	paymentsFromCard.UpdateOne(context.TODO(), filter, update)
+	_, err = paymentsFromCard.UpdateOne(context.TODO(), filter, update)
+	return
 }

@@ -9,23 +9,44 @@ import (
 )
 
 func PostPaymentFromCard(c *gin.Context) {
-	payment := utils.PaymentFromCardDTO{}
-	if err := c.ShouldBindJSON(&payment); err == nil {
-		//TODO: check all fields
-		db.AddNewPaymentFromCard(payment)
-		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
-	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "I don't feel so good..."})
+	request := utils.PaymentFromCardDTO{}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		return
 	}
+	if !paymentFromCardIsRight(request) {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong data"})
+		return
+	}
+	if err := db.AddNewPaymentFromCard(request); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
 }
 
 func PatchPaymentFromCard(c *gin.Context) {
 	paymentID := c.Param("paymentId")
 	patch := utils.PatchPaymentFromCardDTO{}
-	if err := c.ShouldBindJSON(&patch); err == nil {
-		db.PatchPaymentFromCard(patch, paymentID)
-		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
-	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "I don't feel so good..."})
+	if err := c.ShouldBindJSON(&patch); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		return
 	}
+	if err := db.PatchPaymentFromCard(patch, paymentID); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
+}
+
+func paymentFromCardIsRight(payment utils.PaymentFromCardDTO) bool {
+	return utils.IDIsRight(payment.ID) &&
+		utils.CardNumberIsRight(payment.CardNumber) &&
+		utils.CardExpiresIsRight(payment.CardExpires) &&
+		utils.CardCvcIsRight(payment.CardCVC) &&
+		utils.ValueIsRight(payment.Value) &&
+		utils.CommentIsRight(payment.Comment) &&
+		utils.EmailIsRight(payment.Email)
 }
