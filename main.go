@@ -6,10 +6,23 @@ import (
 )
 
 func main() {
-	engine := gin.Default()
-	buildCommonRoutes(engine)
-	buildAPIRoutes(engine)
-	engine.Run()
+	useCommonEngine := true
+	if useCommonEngine {
+		go runCommonEngine()
+	}
+	runAPIEngine()
+}
+
+func runCommonEngine() {
+	commonEngine := gin.Default()
+	buildCommonRoutes(commonEngine)
+	commonEngine.Run(":8080")
+}
+
+func runAPIEngine() {
+	apiEngine := gin.Default()
+	buildAPIRoutes(apiEngine)
+	apiEngine.Run(":3000")
 }
 
 func buildCommonRoutes(engine *gin.Engine) {
@@ -25,6 +38,7 @@ func buildCommonRoutes(engine *gin.Engine) {
 
 func buildAPIRoutes(engine *gin.Engine) {
 	api := engine.Group("/api")
+	api.Use(corsMiddleware())
 	{
 		payments := api.Group("/payments")
 		{
@@ -37,5 +51,11 @@ func buildAPIRoutes(engine *gin.Engine) {
 		{
 			companies.GET("/:companyID", handling.GetCompany)
 		}
+	}
+}
+
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "http://localhost:8080")
 	}
 }
