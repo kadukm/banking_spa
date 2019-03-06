@@ -29,7 +29,7 @@ func buildCommonRoutes(engine *gin.Engine) {
 	indexHandler := func(c *gin.Context) {
 		c.File("./index.html")
 	}
-	engine.Static("/dist", "./dist")
+	engine.Static("/assets", "./assets")
 	engine.StaticFile("/admin-panel", "./index.html")
 	engine.StaticFile("/", "./index.html")
 	engine.GET("/companies/:companyID", indexHandler)

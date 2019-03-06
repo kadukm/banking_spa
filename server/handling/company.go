@@ -11,11 +11,11 @@ import (
 func GetCompany(c *gin.Context) {
 	company := utils.CompanyDTO{
 		Status:         "Индивидуальный предприниматель",
-		Name:           "Швецова Мария Валерьевна",
-		PhotoPath:      "/static/images/test_photo.jpg",
+		Name:           "Гофер",
+		PhotoPath:      "/assets/images/gopher.jpg",
 		Phone:          "+79998887766",
-		Site:           "www.mary.com",
-		Email:          "mary@tochka.ru",
+		Site:           "golang.org",
+		Email:          "gopher@golang.org",
 		FullInfoPath:   "#",
 		RequisitesPath: "#",
 	}
