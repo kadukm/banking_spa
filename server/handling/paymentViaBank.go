@@ -8,6 +8,10 @@ import (
 )
 
 func PostPaymentViaBank(c *gin.Context) {
+	if !utils.MIMEContentTypeIsJSON(c.Request) {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong Content-Type"})
+		return
+	}
 	payment := utils.PaymentViaBankDTO{}
 	if err := c.ShouldBindJSON(&payment); err != nil {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
