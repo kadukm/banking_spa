@@ -44,8 +44,7 @@ func buildCommonRoutes(engine *gin.Engine) {
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
-	api := engine.Group("/api")
-	api.Use(corsMiddleware())
+	api := engine.Group("/api", CORSMiddleware())
 	{
 		payments := api.Group("/payments")
 		{
@@ -61,7 +60,7 @@ func buildAPIRoutes(engine *gin.Engine) {
 	}
 }
 
-func corsMiddleware() gin.HandlerFunc {
+func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "http://localhost:8080")
 	}
