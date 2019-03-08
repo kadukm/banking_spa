@@ -7,9 +7,10 @@ import apiBaseUrl from '../../config.js'
 
 function getDataFrom(url) {
     return new Promise(
-        resolve => fetch(url)
+        (resolve, reject) => fetch(url)
             .then(response => response.json())
             .then(result => resolve(result))
+            .catch(err => reject(err))
     )
 }
 
@@ -23,6 +24,7 @@ export default class Company extends React.Component {
         const companyID = this.props.match.params.companyID
         Promise.all([getDataFrom(`${apiBaseUrl}/api/companies/${companyID}`)])
             .then(([companyInfo]) => this.setState({ok: true, companyInfo: companyInfo}))
+            .catch(err => {this.setState({ok: false}); console.log(err)})
     }
 
     render() {
