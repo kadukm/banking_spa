@@ -54,3 +54,5 @@ GET `/api/payments/from_card?field=<field_name>&desc=<bool_value>`
 GET `/api/payments/requests?field=<field_name>&desc=<bool_value>`
 
 GET `/api/copmanies/:companyID`
+
+GET `/api/companies/:companyID/products?maxcount=<uint_value>`
