@@ -9,7 +9,12 @@ function getDataFrom(url) {
     return new Promise(
         (resolve, reject) => fetch(url)
             .then(response => response.json())
-            .then(result => resolve(result))
+            .then(response => {
+                if (response.ok)
+                    return resolve(response.result)
+                else
+                    throw new Error(response.result)
+            })
             .catch(err => reject(err))
     )
 }
@@ -23,7 +28,9 @@ export default class Company extends React.Component {
     componentDidMount() {
         const companyID = this.props.match.params.companyID
         Promise.all([getDataFrom(`${apiBaseUrl}/api/companies/${companyID}`)])
-            .then(([companyInfo]) => this.setState({ok: true, companyInfo: companyInfo}))
+            .then(([companyInfo]) => {
+                this.setState({ok: true, companyInfo: companyInfo})
+            })
             .catch(err => {this.setState({ok: false}); console.log(err)})
     }
 
@@ -38,7 +45,7 @@ export default class Company extends React.Component {
                 <Delimiter />
                 <Body />
                 <Delimiter />
-                <Footer />
+                <Footer {...this.state.companyInfo}/>
             </div>
         )
     }
