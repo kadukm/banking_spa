@@ -1,11 +1,14 @@
 import React from 'react';
+import "../../../styles/Footer.css"
 
 export default class Footer extends React.Component {
     render() {
         return (
-            <section>
+            <section className="box-wrapper">
                 <h3>О компании {this.props.status} {this.props.name}</h3>
-                {this.props.products.map(product => <Product {...product} key={product.name}/>)}
+                <div className="products">
+                    {this.props.products.map(product => <Product {...product} key={product.name}/>)}
+                </div>
                 <div>{this.props.info}</div>
                 <a href={this.props.full_info_path}>Полная информация</a>
             </section>
@@ -15,9 +18,9 @@ export default class Footer extends React.Component {
 
 function Product(props) {
     return (
-        <div>
+        <div className="product">
             <img src={props.image_path} alt="product_image" />
-            <div>{props.name}</div>
+            <div><strong>{props.name}</strong></div>
             <div>{props.price}</div>
         </div>
     )
