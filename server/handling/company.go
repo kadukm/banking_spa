@@ -12,8 +12,8 @@ import (
 func GetCompany(c *gin.Context) {
 	companyID := c.Param("companyID")
 	if company, err := db.GetCompany(companyID); err == nil {
-		c.JSON(http.StatusOK, company)
+		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: company})
 	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 	}
 }

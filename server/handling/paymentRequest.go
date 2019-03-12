@@ -11,24 +11,24 @@ import (
 
 func PostPaymentRequest(c *gin.Context) {
 	if !utils.MIMEContentTypeIsJSON(c.Request) {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong Content-Type"})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong Content-Type"})
 		return
 	}
 	request := utils.PaymentRequestDTO{}
 	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 	if !paymentRequestIsRight(request) {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong data"})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong data"})
 		return
 	}
 	if err := db.AddNewPaymentRequest(request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
 }
 
 func paymentRequestIsRight(request utils.PaymentRequestDTO) bool {

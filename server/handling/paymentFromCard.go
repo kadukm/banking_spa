@@ -10,39 +10,39 @@ import (
 
 func PostPaymentFromCard(c *gin.Context) {
 	if !utils.MIMEContentTypeIsJSON(c.Request) {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong Content-Type"})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong Content-Type"})
 		return
 	}
 	request := utils.PaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 	if !paymentFromCardIsRight(request) {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: "Wrong data"})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong data"})
 		return
 	}
 	if err := db.AddNewPaymentFromCard(request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
 }
 
 func PatchPaymentFromCard(c *gin.Context) {
 	paymentID := c.Param("paymentID")
 	patch := utils.PatchPaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&patch); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 	if err := db.PatchPaymentFromCard(patch, paymentID); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Message: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Message: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
 }
 
 func paymentFromCardIsRight(payment utils.PaymentFromCardDTO) bool {
