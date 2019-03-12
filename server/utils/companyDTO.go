@@ -7,6 +7,7 @@ type CompanyDTO struct {
 	Phone          string `json:"phone"`
 	Site           string `json:"site"`
 	Email          string `json:"email"`
+	Info           string `json:"info"`
 	FullInfoPath   string `json:"full_info_path"`
 	RequisitesPath string `json:"requisites_path"`
 }

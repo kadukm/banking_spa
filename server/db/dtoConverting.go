@@ -36,6 +36,7 @@ func (company_ company) convertToCompanyDTO() utils.CompanyDTO {
 		Phone:          company_.Phone,
 		Site:           company_.Site,
 		Email:          company_.Email,
+		Info:           company_.Info,
 		FullInfoPath:   company_.FullInfoPath,
 		RequisitesPath: company_.RequisitesPath,
 	}

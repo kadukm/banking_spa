@@ -32,6 +32,7 @@ type company struct {
 	Phone          string `bson:"phone"`
 	Site           string `bson:"site"`
 	Email          string `bson:"email"`
+	Info           string `bson:"info"`
 	FullInfoPath   string `bson:"full_info_path"`
 	RequisitesPath string `bson:"requisites_path"`
 }
