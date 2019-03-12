@@ -1,0 +1,36 @@
+.user-info {
+    overflow: hidden;
+}
+
+.user-info__photo {
+    float: right;
+    max-height: 150px;
+}
+
+.user-info__header {
+    font-size: 20px;
+    margin: 0 0 15px 0;
+}
+
+.user-info__phone {
+    color: gray;
+}
+
+.user-info__site,
+.user-info__phone {
+    margin: 0 20px 0 0;
+}
+
+.user-info__company {
+    display: block;
+    margin: 20px 0 10px 0;
+}
+
+@media screen and (max-width: 400px) {
+    .user-info__photo {
+        float: none;
+        display: block;
+        min-width: 60%;
+        margin: 0 auto;
+    }
+}
