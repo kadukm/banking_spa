@@ -56,6 +56,7 @@ func buildAPIRoutes(engine *gin.Engine) {
 		companies := api.Group("/companies")
 		{
 			companies.GET("/:companyID", handling.GetCompany)
+			companies.GET("/:companyID/products", handling.GetProducts)
 		}
 	}
 }

@@ -5,6 +5,8 @@ import Footer from './parts/Footer.jsx'
 import Delimiter from '../utils/Delimiter.jsx'
 import apiBaseUrl from '../../config.js' 
 
+const maxProductsCount = 4
+
 function getDataFrom(url) {
     return new Promise(
         (resolve, reject) => fetch(url)
@@ -22,14 +24,20 @@ function getDataFrom(url) {
 export default class Company extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {ok: undefined, companyInfo: undefined}
+        this.state = {
+            ok: undefined,
+            companyInfo: undefined,
+            products: undefined}
     }
 
     componentDidMount() {
         const companyID = this.props.match.params.companyID
-        Promise.all([getDataFrom(`${apiBaseUrl}/api/companies/${companyID}`)])
-            .then(([companyInfo]) => {
-                this.setState({ok: true, companyInfo: companyInfo})
+        Promise.all([
+                getDataFrom(`${apiBaseUrl}/api/companies/${companyID}`),
+                getDataFrom(`${apiBaseUrl}/api/companies/${companyID}/products?maxcount=${maxProductsCount}`)
+            ])
+            .then(([companyInfo, products]) => {
+                this.setState({ok: true, companyInfo: companyInfo, products: products})
             })
             .catch(err => {this.setState({ok: false}); console.log(err)})
     }
@@ -45,7 +53,7 @@ export default class Company extends React.Component {
                 <Delimiter />
                 <Body />
                 <Delimiter />
-                <Footer {...this.state.companyInfo}/>
+                <Footer {...this.state.companyInfo} products={this.state.products}/>
             </div>
         )
     }

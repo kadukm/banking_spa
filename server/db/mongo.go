@@ -14,6 +14,7 @@ import (
 var paymentsFromCard mongo.Collection
 var paymentRequests mongo.Collection
 var companies mongo.Collection
+var products mongo.Collection
 
 func init() {
 	client, _ := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
@@ -21,6 +22,7 @@ func init() {
 	paymentsFromCard = *db.Collection("payments-from-card")
 	paymentRequests = *db.Collection("payment-requests")
 	companies = *db.Collection("companies")
+	products = *db.Collection("products")
 }
 
 func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) error {
@@ -53,5 +55,34 @@ func GetCompany(companyID string) (res utils.CompanyDTO, err error) {
 		return
 	}
 	res = companyInstance.convertToCompanyDTO()
+	return
+}
+
+func GetProducts(companyID string, maxCount int64) (res []*utils.ProductDTO, err error) {
+	filter := bson.M{"company_id": companyID}
+
+	findOptions := options.Find()
+	findOptions.SetLimit(maxCount)
+
+	cursor, err := products.Find(context.TODO(), filter, findOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for cursor.Next(context.TODO()) {
+		var curProduct product
+		err = cursor.Decode(&curProduct)
+		if err != nil {
+			return nil, err
+		}
+		curProductDTO := curProduct.convertToProductDTO()
+		res = append(res, &curProductDTO)
+	}
+
+	if err = cursor.Err(); err != nil {
+		return nil, err
+	}
+
+	cursor.Close(context.TODO())
 	return
 }

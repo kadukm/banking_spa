@@ -28,16 +28,25 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 	}
 }
 
-func (company_ company) convertToCompanyDTO() utils.CompanyDTO {
+func (company company) convertToCompanyDTO() utils.CompanyDTO {
 	return utils.CompanyDTO{
-		Status:         company_.Status,
-		Name:           company_.Name,
-		PhotoPath:      company_.PhotoPath,
-		Phone:          company_.Phone,
-		Site:           company_.Site,
-		Email:          company_.Email,
-		Info:           company_.Info,
-		FullInfoPath:   company_.FullInfoPath,
-		RequisitesPath: company_.RequisitesPath,
+		Status:         company.Status,
+		Name:           company.Name,
+		PhotoPath:      company.PhotoPath,
+		Phone:          company.Phone,
+		Site:           company.Site,
+		Email:          company.Email,
+		Info:           company.Info,
+		FullInfoPath:   company.FullInfoPath,
+		RequisitesPath: company.RequisitesPath,
+	}
+}
+
+func (product product) convertToProductDTO() utils.ProductDTO {
+	return utils.ProductDTO{
+		CompanyID: product.CompanyID,
+		Name:      product.Name,
+		ImagePath: product.ImagePath,
+		Price:     product.Price,
 	}
 }

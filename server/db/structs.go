@@ -36,3 +36,11 @@ type company struct {
 	FullInfoPath   string `bson:"full_info_path"`
 	RequisitesPath string `bson:"requisites_path"`
 }
+
+type product struct {
+	ID        primitive.ObjectID `bson:"_id"`
+	CompanyID string             `bson:"company_id"`
+	Name      string             `bson:"name"`
+	ImagePath string             `bson:"image_path"`
+	Price     string             `bson:"price"` //TODO: store price in different format
+}
