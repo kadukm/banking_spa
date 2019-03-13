@@ -8,7 +8,7 @@ POST `/api/payments/from_card`
     card_number: "2424242424242424" | str, 16 digits
     card_expires: "MM/YY"           | str, YY between 19 and 35
     card_cvc: 776                   | int, between 100 and 999
-    amount: 7777                     | int, between 1000 and 75000
+    amount: 7777                    | int, between 1000 and 75000
     comment: "txt"                  | str, length not more 150
     email: "example@mail.com"       | str, with email pattern
 }
@@ -21,7 +21,7 @@ POST `/api/payments/via_bank`
     bik: "123456789"                       | str, 9 digits
     account_number: "12345678901234567890" | str, 20 digits
     for_what: "без НДС"                    | str, contains "без НДС" or "НДС 10%" or "НДС 18%"
-    amount: 7777                            | int, between 1000 and 75000
+    amount: 7777                           | int, between 1000 and 75000
 }
 ```
 
@@ -32,7 +32,7 @@ POST `/api/payments/requests`
     bik: 123456789                         | str, 9 digits
     account_number: "12345678901234567890" | str, 20 digits
     for_what: "без НДС"                    | str, contains "без НДС" or "НДС 10%" or "НДС 18%"
-    amount: 7777                            | int, between 1000 and 75000
+    amount: 7777                           | int, between 1000 and 75000
     phone: "+79997772211"                  | str, 10 digits
     email: "example@mail.com"              | str, with email pattern
 }
