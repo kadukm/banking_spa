@@ -2,6 +2,7 @@ package utils
 
 import (
 	"regexp"
+	"strings"
 	"unicode"
 )
 
@@ -28,7 +29,9 @@ func AccountNumberIsRight(accountNumber string) bool {
 }
 
 func ForWhatIsRight(forWhat string) bool {
-	return forWhat == "без НДС" || forWhat == "НДС 10%" || forWhat == "НДС 18%"
+	return strings.Contains(forWhat, "без НДС") ||
+		strings.Contains(forWhat, "НДС 10%") ||
+		strings.Contains(forWhat, "НДС 18%")
 }
 
 func ValueIsRight(value int) bool {
