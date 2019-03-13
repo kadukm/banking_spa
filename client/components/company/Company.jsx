@@ -51,7 +51,7 @@ export default class Company extends React.Component {
             <div>
                 <Header {...this.state.companyInfo}/>
                 <Delimiter />
-                <Body />
+                <Body {...this.state.companyInfo}/>
                 <Delimiter />
                 <Footer {...this.state.companyInfo} products={this.state.products}/>
             </div>

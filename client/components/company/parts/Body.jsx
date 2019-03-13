@@ -17,7 +17,7 @@ export default class Body extends React.Component {
                 <button onClick={() => this.setState({isRequest: false})}>Заплатить</button>
                 <button onClick={() => this.setState({isRequest: true})}>Запросить платёж</button>
                 {this.state.isRequest
-                    ? <Request />
+                    ? <Request status={this.props.status} name={this.props.name}/>
                     : <Payment />}
             </div>
         )
