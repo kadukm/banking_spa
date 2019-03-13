@@ -4,6 +4,7 @@ import Body from './parts/Body.jsx'
 import Footer from './parts/Footer.jsx'
 import Delimiter from '../utils/Delimiter.jsx'
 import apiBaseUrl from '../../config.js' 
+import '../../styles/Company.css'
 
 const maxProductsCount = 4
 
@@ -48,7 +49,7 @@ export default class Company extends React.Component {
         if (this.state.ok === false)
             return <div>Can't load data about {this.props.match.params.companyID}</div>
         return (
-            <div>
+            <div className="company-page">
                 <Header {...this.state.companyInfo}/>
                 <Delimiter />
                 <Body {...this.state.companyInfo}/>
