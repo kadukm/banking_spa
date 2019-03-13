@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/handling"
 )
@@ -28,6 +29,10 @@ func runCommonEngine() {
 
 func runAPIEngine() {
 	apiEngine := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8080"}
+	config.AllowHeaders = []string{"Content-Type"}
+	apiEngine.Use(cors.New(config))
 	buildAPIRoutes(apiEngine)
 	apiEngine.Run(":3000")
 }
@@ -44,7 +49,7 @@ func buildCommonRoutes(engine *gin.Engine) {
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
-	api := engine.Group("/api", CORSMiddleware())
+	api := engine.Group("/api")
 	{
 		payments := api.Group("/payments")
 		{
@@ -58,11 +63,5 @@ func buildAPIRoutes(engine *gin.Engine) {
 			companies.GET("/:companyID", handling.GetCompany)
 			companies.GET("/:companyID/products", handling.GetProducts)
 		}
-	}
-}
-
-func CORSMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "http://localhost:8080")
 	}
 }
