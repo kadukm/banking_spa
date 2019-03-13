@@ -34,8 +34,8 @@ func ForWhatIsRight(forWhat string) bool {
 		strings.Contains(forWhat, "НДС 18%")
 }
 
-func ValueIsRight(value int) bool {
-	return value >= 1000 && value <= 75000
+func AmountIsRight(amount int) bool {
+	return amount >= 1000 && amount <= 75000
 }
 
 func PhoneIsRight(phone string) bool {

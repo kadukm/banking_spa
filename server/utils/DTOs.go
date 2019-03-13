@@ -5,7 +5,7 @@ type PaymentFromCardDTO struct {
 	CardNumber  string `json:"card_number"`
 	CardExpires string `json:"card_expires"`
 	CardCVC     int    `json:"card_cvc"`
-	Value       int    `json:"value"`
+	Amount      int    `json:"amount"`
 	Comment     string `json:"comment"`
 	Email       string `json:"email"`
 	Dangerous   bool   `json:"dangerous"`
@@ -17,7 +17,7 @@ type PaymentRequestDTO struct {
 	BIK           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
-	Value         int    `json:"value"`
+	Amount        int    `json:"amount"`
 	Phone         string `json:"phone"`
 	Email         string `json:"email"`
 }
@@ -27,7 +27,7 @@ type PaymentViaBankDTO struct {
 	BIK           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
 	ForWhat       string `json:"for_what"`
-	Value         int    `json:"value"`
+	Amount        int    `json:"amount"`
 }
 
 type PatchPaymentFromCardDTO struct {

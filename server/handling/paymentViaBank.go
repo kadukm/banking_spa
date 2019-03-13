@@ -30,5 +30,5 @@ func paymentViaBankIsRIght(payment utils.PaymentViaBankDTO) bool {
 		utils.BIKIsRight(payment.BIK) &&
 		utils.AccountNumberIsRight(payment.AccountNumber) &&
 		utils.ForWhatIsRight(payment.ForWhat) &&
-		utils.ValueIsRight(payment.Value)
+		utils.AmountIsRight(payment.Amount)
 }

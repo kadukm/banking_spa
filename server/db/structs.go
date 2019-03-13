@@ -7,7 +7,7 @@ type paymentFromCard struct {
 	CardNumber  string             `bson:"card_number"`
 	CardExpires string             `bson:"card_expires"`
 	CardCVC     int                `bson:"card_cvc"`
-	Value       int                `bson:"value"`
+	Amount      int                `bson:"amount"`
 	Comment     string             `bson:"comment"`
 	Email       string             `bson:"email"`
 	Dangerous   bool               `bson:"dangerous"`
@@ -19,7 +19,7 @@ type paymentRequest struct {
 	BIK           string             `bson:"bik"`
 	AccountNumber string             `bson:"account_number"`
 	ForWhat       string             `bson:"for_what"`
-	Value         int                `bson:"value"`
+	Amount        int                `bson:"amount"`
 	Phone         string             `bson:"phone"`
 	Email         string             `bson:"email"`
 }

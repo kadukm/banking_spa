@@ -50,7 +50,7 @@ func paymentFromCardIsRight(payment utils.PaymentFromCardDTO) bool {
 		utils.CardNumberIsRight(payment.CardNumber) &&
 		utils.CardExpiresIsRight(payment.CardExpires) &&
 		utils.CardCvcIsRight(payment.CardCVC) &&
-		utils.ValueIsRight(payment.Value) &&
+		utils.AmountIsRight(payment.Amount) &&
 		utils.CommentIsRight(payment.Comment) &&
 		utils.EmailIsRight(payment.Email)
 }

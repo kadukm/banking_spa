@@ -9,7 +9,7 @@ func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) paymentFromCard 
 		CardNumber:  payment.CardNumber,
 		CardExpires: payment.CardExpires,
 		CardCVC:     payment.CardCVC,
-		Value:       payment.Value,
+		Amount:      payment.Amount,
 		Comment:     payment.Comment,
 		Email:       payment.Email,
 		Dangerous:   payment.Dangerous,
@@ -22,7 +22,7 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 		BIK:           payment.BIK,
 		AccountNumber: payment.AccountNumber,
 		ForWhat:       payment.ForWhat,
-		Value:         payment.Value,
+		Amount:        payment.Amount,
 		Phone:         payment.Phone,
 		Email:         payment.Email,
 	}

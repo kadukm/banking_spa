@@ -37,7 +37,7 @@ func paymentRequestIsRight(request utils.PaymentRequestDTO) bool {
 		utils.BIKIsRight(request.BIK) &&
 		utils.AccountNumberIsRight(request.AccountNumber) &&
 		utils.ForWhatIsRight(request.ForWhat) &&
-		utils.ValueIsRight(request.Value) &&
+		utils.AmountIsRight(request.Amount) &&
 		utils.PhoneIsRight(request.Phone) &&
 		utils.EmailIsRight(request.Email)
 }
