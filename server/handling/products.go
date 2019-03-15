@@ -12,7 +12,7 @@ import (
 
 func GetProducts(c *gin.Context) {
 	companyID := c.Param("companyID")
-	strMaxCount := c.DefaultQuery("maxcount", "4")
+	strMaxCount := c.DefaultQuery("maxcount", "3")
 	maxCount, err := strconv.ParseInt(strMaxCount, 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})

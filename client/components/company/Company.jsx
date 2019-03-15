@@ -3,10 +3,8 @@ import Header from './parts/Header.jsx'
 import Body from './parts/Body.jsx'
 import Footer from './parts/Footer.jsx'
 import Delimiter from '../utils/Delimiter.jsx'
-import apiBaseUrl from '../../config.js' 
+import apiBaseUrl, {maxProductsCount} from '../../config.js' 
 import '../../styles/Company.css'
-
-const maxProductsCount = 4
 
 function getDataFrom(url) {
     return new Promise(
