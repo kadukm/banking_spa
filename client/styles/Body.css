@@ -11,3 +11,9 @@
 .standard-input {
     border-width: 0 0 2px 0;
 }
+
+@media screen and (max-width: 559px) {
+    .standard-field {
+        padding-right: 1px;
+    }
+}

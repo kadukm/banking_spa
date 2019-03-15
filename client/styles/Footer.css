@@ -1,16 +1,24 @@
 .product {
-    min-width: 250px;
-    text-align: center;
+    border: 1px solid rgb(231, 231, 231);
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 160px;
+    min-height: 220px;
+    text-align: left;
     margin-top: auto;
 }
 
 .product > img {
-    max-height: 220px;
+    max-width: 150px;
 }
 
 .products {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 20px;
+}
+
+.products__info {
+    margin-bottom: 15px;
 }
