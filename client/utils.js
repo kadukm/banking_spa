@@ -16,13 +16,28 @@ export function prepareAccountNumber(value) {
 export function prepareAmount(value) {
     const newValue = value.replace(/^0+/, '').replace(/[^0-9]/, '')
     if (newValue === '')
-        return 0
+        return ''
     return parseInt(newValue)
 }
 
 export function preparePhone(value) {
     const newValue = value.replace(/[^0-9+]/, '')
     return newValue.substring(0, 12)
+}
+
+export function prepareCardNumber(value) {
+    const newValue = value.replace(/[^0-9]/, '')
+    return newValue.substring(0, 16)
+}
+
+export function prepareCardExpires(value) {
+    const newValue = value.replace(/[^0-9]\//, '')
+    return newValue.substring(0, 5)
+}
+
+export function prepareCardCvc(value) {
+    const newValue = value.replace(/[^0-9]/, '')
+    return newValue.substring(0, 3)
 }
 
 function stringIsInteger(value) {
@@ -60,4 +75,16 @@ export function isPhoneOk(value) {
 
 export function isEmailOk(value) {
     return /\w+@\w+\.\w+/.test(value)
+}
+
+export function isCardNumberOk(value) {
+    return stringIsInteger(value) && value.length == 16
+}
+
+export function isCardExpiresOk(value) {
+    return /^(0[1-9]|1[0-2])\/(19|[23]\d|2[0-5])$/.test(value)
+}
+
+export function isCardCvcOk(value) {
+    return stringIsInteger(value) && value.length == 3
 }
