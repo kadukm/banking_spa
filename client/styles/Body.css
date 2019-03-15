@@ -1,3 +1,13 @@
 .wrong-input {
     background-color: #EC8F8F;
 }
+
+.standard-field {
+    padding-right: 10%;
+    overflow: hidden;
+    margin: 15px 0 15px 0;
+}
+
+.standard-input {
+    border-width: 0 0 2px 0;
+}

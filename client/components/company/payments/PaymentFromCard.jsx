@@ -116,9 +116,9 @@ export default class PaymentFromCard extends React.Component {
                         </div>
                     </div>
                     <div className="pay-card__other-info">
-                        <div>
+                        <div className="standard-field">
                             <label htmlFor="amount">Сумма</label>
-                            <input className={this.state.ok.amount === false ? 'wrong-input' : ''}
+                            <input className={`standard-input ${this.state.ok.amount === false ? 'wrong-input' : ''}`}
                                 type="text"
                                 placeholder="от 1 000 до 75 000₽"
                                 name="amount"
@@ -128,10 +128,10 @@ export default class PaymentFromCard extends React.Component {
                                 value={this.state.data.amount}
                             />
                         </div>
-                        <div>
+                        <div className="standard-field">
                             <label htmlFor="comment">Комментарий</label>
-                            <input
-                                type="text"
+                            <textarea className="standard-input"
+                                type="textarea"
                                 placeholder="До 150 символов"
                                 name="comment"
                                 id="comment"
@@ -140,9 +140,9 @@ export default class PaymentFromCard extends React.Component {
                                 value={this.state.data.comment}
                             />
                         </div>
-                        <div>
+                        <div className="standard-field">
                             <label htmlFor="email">Ваш email</label>
-                            <input className={this.state.ok.email === false ? 'wrong-input' : ''}
+                            <input className={`standard-input ${this.state.ok.email === false ? 'wrong-input' : ''}`}
                                 type="email"
                                 placeholder="Для квитанций об оплате"
                                 name="email"

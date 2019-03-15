@@ -1,7 +1,5 @@
 .pay-card {
     margin: 30px auto 20px auto;
-    /* font-size: 110%; */
-    /* line-height: 40px; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -43,15 +41,33 @@
     margin-top: 15px;
 }
 
-.pay-card__card-number-input {
+.pay-card__other-info input,
+.pay-card__other-info textarea {
+    float: right;
+    width: 55%;
+}
+
+.pay-card__card input {
     background-color: #cccccc00;
+    border-width: 0 0 2px 0;
+    border-color: grey;
+}
+
+.pay-card__card-number-input {
     margin: 0 0 0 10px;
     width: 220px;
     display: block;
 }
-input.pay-card__small-input {
-    /* background-color: #cccccc00; */
+
+.pay-card__small-input {
     margin: 20px 10px 0 10px;
     width: 65px;
     min-width: 0;
+}
+
+@media screen and (max-width: 559px) {
+    .pay-card__other-info input,
+    .pay-card__other-info textarea {
+        min-width: 90%;
+    }
 }

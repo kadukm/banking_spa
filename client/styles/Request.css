@@ -1,0 +1,14 @@
+.request {
+    padding-right: 20%;
+}
+
+.request .standard-field input {
+    float: right;
+    width: 60%;
+}
+
+@media screen and (max-width: 559px) {
+    .request {
+        padding: 0;
+    }
+}

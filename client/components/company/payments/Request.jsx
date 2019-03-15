@@ -68,7 +68,7 @@ export default class Request extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="request">
                 <Modal isOpen={this.state.modal.show}>
                     <div>
                         {this.state.modal.message}
@@ -81,9 +81,9 @@ export default class Request extends React.Component {
                     </strong>
                 </header>
                 <div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="inn">ИНН получателя</label>
-                        <input className={this.state.ok.inn === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.inn === false ? 'wrong-input' : ''}`}
                             type="text"
                             name="inn"
                             id="inn"
@@ -93,9 +93,9 @@ export default class Request extends React.Component {
                             value={this.state.data.inn}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="bik">БИК</label>
-                        <input className={this.state.ok.bik === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.bik === false ? 'wrong-input' : ''}`}
                             type="text"
                             name="bik"
                             id="bik"
@@ -105,9 +105,9 @@ export default class Request extends React.Component {
                             value={this.state.data.bik}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="account_number">Номер счёта</label>
-                        <input className={this.state.ok.account_number === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.account_number === false ? 'wrong-input' : ''}`}
                             type="text"
                             name="account_number"
                             id="account_number"
@@ -117,9 +117,9 @@ export default class Request extends React.Component {
                             value={this.state.data.account_number}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="for_what">За что</label>
-                        <input className={this.state.ok.for_what === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.for_what === false ? 'wrong-input' : ''}`}
                             type="text"
                             id="for_what"
                             name="for_what"
@@ -128,9 +128,9 @@ export default class Request extends React.Component {
                             value={this.state.data.for_what}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="amount">Сколько</label>
-                        <input className={this.state.ok.amount === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.amount === false ? 'wrong-input' : ''}`}
                             type="text"
                             name="amount"
                             id="amount"
@@ -140,9 +140,9 @@ export default class Request extends React.Component {
                             value={this.state.data.amount}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="phone">Телефон</label>
-                        <input className={this.state.ok.phone === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.phone === false ? 'wrong-input' : ''}`}
                             type="tel"
                             name="phone"
                             id="phone"
@@ -152,9 +152,9 @@ export default class Request extends React.Component {
                             value={this.state.data.phone}
                         />
                     </div>
-                    <div>
+                    <div className="standard-field">
                         <label htmlFor="email">Ваш email</label>
-                        <input className={this.state.ok.email === false ? 'wrong-input' : ''}
+                        <input className={`standard-input ${this.state.ok.email === false ? 'wrong-input' : ''}`}
                             type="email"
                             name="email"
                             id="email"
