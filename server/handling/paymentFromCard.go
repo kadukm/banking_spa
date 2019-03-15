@@ -27,7 +27,7 @@ func PostPaymentFromCard(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "Платеж прошел успешно"})
 }
 
 func PatchPaymentFromCard(c *gin.Context) {

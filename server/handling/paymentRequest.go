@@ -28,7 +28,7 @@ func PostPaymentRequest(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "Запрос прошел успешно"})
 }
 
 func paymentRequestIsRight(request utils.PaymentRequestDTO) bool {
