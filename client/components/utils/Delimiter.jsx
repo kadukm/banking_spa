@@ -1,8 +1,7 @@
 import React from 'react';
+import '../../styles/Delimiter.css'
 
 
 export default function Delimiter() {
-    return (
-        <br />
-    )
+    return <div className="delimiter"></div>
 }
