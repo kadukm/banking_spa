@@ -82,7 +82,7 @@ export default class Request extends React.Component {
                 </header>
                 <div>
                     <div className="standard-field">
-                        <label htmlFor="inn">ИНН получателя</label>
+                        <label htmlFor="inn">ИНН</label>
                         <input className={`standard-input ${this.state.ok.inn === false ? 'wrong-input' : ''}`}
                             type="text"
                             name="inn"

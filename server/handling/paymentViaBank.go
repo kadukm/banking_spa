@@ -21,7 +21,7 @@ func PostPaymentViaBank(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "wrong data"})
 		return
 	}
-	//TODO: send read pdf
+	//TODO: send real pdf
 	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
 }
 
