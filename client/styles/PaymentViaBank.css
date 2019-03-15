@@ -1,0 +1,14 @@
+.payment-via-bank {
+    padding-right: 20%;
+}
+
+.payment-via-bank .standard-field input {
+    float: right;
+    width: 60%;
+}
+
+@media screen and (max-width: 559px) {
+    .payment-via-bank {
+        padding: 0;
+    }
+}

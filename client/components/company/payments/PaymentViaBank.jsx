@@ -1,9 +1,198 @@
 import React from 'react';
+import Modal from 'react-modal'
+import '../../../styles/PaymentViaBank.css'
+import apiBaseUrl from '../../../config.js'
+import * as utils from '../../../utils.js'
 
 export default class PaymentViaBank extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            modal: {
+                show: false,
+                message: undefined
+            },
+            ok: {
+                inn: undefined,
+                bik: undefined,
+                account_number: undefined,
+                for_what: undefined,
+                amount: undefined
+            },
+            data: {
+                inn: '',
+                bik: '',
+                account_number: '',
+                for_what: '',
+                amount: ''
+            }
+        }
+    }
+
+    postPaymentViaBank = () => {
+        if (!this.isAllFieldsOk()) {
+            this.setState({modal: {show: true, message: 'Одно или несколько полей не заполнены или заполнены некорректно'}})
+            return
+        }
+
+        const init = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state.data),
+            mode: 'cors'
+        }
+        fetch(`${apiBaseUrl}/api/payments/via_bank`, init)
+            .then(response => response.json())
+            .then(res => {
+                if (res.ok) {
+                    //TODO: download data
+                }
+                else {
+                    this.setState({modal: {show: true, message: res.result}})
+                }
+            })
+    }
+
+    isAllFieldsOk = () => {
+        return this.state.ok.inn &&
+               this.state.ok.bik &&
+               this.state.ok.account_number &&
+               this.state.ok.for_what &&
+               this.state.ok.amount
+    }
+
+    closeModal = () => {
+        this.setState({modal: {show: false, message: undefined}})
+    }
+
     render() {
         return (
-            <div>Payment via bank</div>
+            <div className="payment-via-bank">
+                <Modal isOpen={this.state.modal.show}>
+                    <div>
+                        {this.state.modal.message}
+                    </div>
+                    <button onClick={this.closeModal}>Закрыть</button>
+                </Modal>
+                <header>
+                    <strong>
+                        Сформируйте платёжку и загрузите её в свой банк для подписи
+                    </strong>
+                </header>
+                <div>
+                    <div className="standard-field">
+                        <label htmlFor="inn">От кого</label>
+                        <input className={`standard-input ${this.state.ok.inn === false ? 'wrong-input' : ''}`}
+                            type="text"
+                            name="inn"
+                            id="inn"
+                            placeholder="ИНН (10 цифр)"
+                            onChange={this.onChangeInn}
+                            onBlur={this.onBlurInn}
+                            value={this.state.data.inn}
+                        />
+                    </div>
+                    <div className="standard-field">
+                        <label htmlFor="bik">БИК</label>
+                        <input className={`standard-input ${this.state.ok.bik === false ? 'wrong-input' : ''}`}
+                            type="text"
+                            name="bik"
+                            id="bik"
+                            placeholder="БИК (9 цифр)"
+                            onChange={this.onChangeBik}
+                            onBlur={this.onBlurBik}
+                            value={this.state.data.bik}
+                        />
+                    </div>
+                    <div className="standard-field">
+                        <label htmlFor="account_number">Номер счёта</label>
+                        <input className={`standard-input ${this.state.ok.account_number === false ? 'wrong-input' : ''}`}
+                            type="text"
+                            name="account_number"
+                            id="account_number"
+                            placeholder="Номер счёта (20 цифр)"
+                            onChange={this.onChangeAccountNumber}
+                            onBlur={this.onBlurAccountNumber}
+                            value={this.state.data.account_number}
+                        />
+                    </div>
+                    <div className="standard-field">
+                        <label htmlFor="for_what">За что</label>
+                        <input className={`standard-input ${this.state.ok.for_what === false ? 'wrong-input' : ''}`}
+                            type="text"
+                            id="for_what"
+                            name="for_what"
+                            onChange={this.onChangeForWhat}
+                            onBlur={this.onBlurForWhat}
+                            value={this.state.data.for_what}
+                        />
+                    </div>
+                    <div className="standard-field">
+                        <label htmlFor="amount">Сколько</label>
+                        <input className={`standard-input ${this.state.ok.amount === false ? 'wrong-input' : ''}`}
+                            type="text"
+                            name="amount"
+                            id="amount"
+                            placeholder="От 1000 до 75000 рублей"
+                            onChange={this.onChangeAmount}
+                            onBlur={this.onBlurAmount}
+                            value={this.state.data.amount}
+                        />
+                    </div>
+                    <button onClick={this.postPaymentViaBank}>Получить файл для интернет-банка</button>
+                </div>
+            </div>
         )
+    }
+
+    onChangeInn = (event) => {
+        const value = utils.prepareInn(event.target.value)
+        this.setState({data: {...this.state.data, inn: value}})
+    }
+
+    onChangeBik = (event) => {
+        const value = utils.prepareBik(event.target.value)
+        this.setState({data: {...this.state.data, bik: value}})
+    }
+
+    onChangeAccountNumber = (event) => {
+        const value = utils.prepareAccountNumber(event.target.value)
+        this.setState({data: {...this.state.data, account_number: value}})
+    }
+
+    onChangeForWhat = (event) => {
+        this.setState({data: {...this.state.data, for_what: event.target.value}})
+    }
+
+    onChangeAmount = (event) => {
+        const value = utils.prepareAmount(event.target.value)
+        this.setState({data: {...this.state.data, amount: value}})
+    }
+
+    onBlurInn = () => {
+        const innOk = utils.isInnOk(this.state.data.inn)
+        this.setState({ok: {...this.state.ok, inn: innOk}})
+    }
+
+    onBlurBik = () => {
+        const bikOk = utils.isBikOk(this.state.data.bik)
+        this.setState({ok: {...this.state.ok, bik: bikOk}})
+    }
+
+    onBlurAccountNumber = () => {
+        const accountNumberOk = utils.isAccountNumberOk(this.state.data.account_number)
+        this.setState({ok: {...this.state.ok, account_number: accountNumberOk}})
+    }
+
+    onBlurForWhat = () => {
+        const forWhatOk = utils.isForWhatOk(this.state.data.for_what)
+        this.setState({ok: {...this.state.ok, for_what: forWhatOk}})
+    }
+
+    onBlurAmount = () => {
+        const amountOk = utils.isAmountOk(this.state.data.amount)
+        this.setState({ok: {...this.state.ok, amount: amountOk}})
     }
 }

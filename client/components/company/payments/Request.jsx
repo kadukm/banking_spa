@@ -35,7 +35,7 @@ export default class Request extends React.Component {
 
     postRequest = () => {
         if (!this.isAllFieldsOk()) {
-            this.setState({modal: {show: true, message: 'Одно или несколько полей заполнены некорректно'}})
+            this.setState({modal: {show: true, message: 'Одно или несколько полей не заполнены или заполнены некорректно'}})
             return
         }
 

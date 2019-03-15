@@ -34,7 +34,7 @@ export default class PaymentFromCard extends React.Component {
 
     postPayment = () => {
         if (!this.isAllFieldsOk()) {
-            this.setState({modal: {show: true, message: 'Одно или несколько полей заполнены некорректно'}})
+            this.setState({modal: {show: true, message: 'Одно или несколько полей не заполнены или заполнены некорректно'}})
             return
         }
 
