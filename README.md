@@ -7,7 +7,7 @@ POST `/api/payments/from_card`
 {
     card_number: "2424242424242424" | str, 16 digits
     card_expires: "MM/YY"           | str, YY between 19 and 35
-    card_cvc: 776                   | int, between 100 and 999
+    card_cvc: "776"                 | str, 3 digits
     amount: 7777                    | int, between 1000 and 75000
     comment: "txt"                  | str, length not more 150
     email: "example@mail.com"       | str, with email pattern

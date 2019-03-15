@@ -56,8 +56,9 @@ func CardExpiresIsRight(expires string) bool {
 	return expiresPattern.MatchString(expires)
 }
 
-func CardCvcIsRight(cvc int) bool {
-	return cvc >= 100 && cvc <= 999
+func CardCvcIsRight(cvc string) bool {
+	cvcLength := len(cvc)
+	return cvcLength == 3 && stringContainsOnlyDigits(cvc)
 }
 
 func CommentIsRight(comment string) bool {

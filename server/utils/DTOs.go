@@ -4,7 +4,7 @@ type PaymentFromCardDTO struct {
 	ID          string `json:"id"`
 	CardNumber  string `json:"card_number"`
 	CardExpires string `json:"card_expires"`
-	CardCVC     int    `json:"card_cvc"`
+	CardCVC     string `json:"card_cvc"`
 	Amount      int    `json:"amount"`
 	Comment     string `json:"comment"`
 	Email       string `json:"email"`

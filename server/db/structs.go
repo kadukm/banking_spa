@@ -6,7 +6,7 @@ type paymentFromCard struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty"`
 	CardNumber  string             `bson:"card_number"`
 	CardExpires string             `bson:"card_expires"`
-	CardCVC     int                `bson:"card_cvc"`
+	CardCVC     string             `bson:"card_cvc"`
 	Amount      int                `bson:"amount"`
 	Comment     string             `bson:"comment"`
 	Email       string             `bson:"email"`
