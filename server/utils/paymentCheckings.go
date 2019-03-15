@@ -7,7 +7,7 @@ import (
 )
 
 var emailPattern *regexp.Regexp = regexp.MustCompile(`\w+@\w+\.\w+`)
-var expiresPattern *regexp.Regexp = regexp.MustCompile(`(0[1-9]|1[0-2])/(19|[23]\d|2[0-5])`)
+var expiresPattern *regexp.Regexp = regexp.MustCompile(`^(0[1-9]|1[0-2])/(19|[23]\d|2[0-5])$`)
 
 func IDIsRight(id string) bool {
 	return id == ""
