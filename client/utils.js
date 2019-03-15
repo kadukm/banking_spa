@@ -31,7 +31,7 @@ export function prepareCardNumber(value) {
 }
 
 export function prepareCardExpires(value) {
-    const newValue = value.replace(/[^0-9]\//, '')
+    const newValue = value.replace(/[^0-9/]/, '')
     return newValue.substring(0, 5)
 }
 
