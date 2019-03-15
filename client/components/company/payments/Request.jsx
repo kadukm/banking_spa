@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal'
 import '../../../styles/Request.css'
 import apiBaseUrl from '../../../config.js'
 import * as utils from '../../../utils.js'
@@ -7,6 +8,10 @@ export default class Request extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            modal: {
+                show: false,
+                message: undefined
+            },
             ok: {
                 inn: undefined,
                 bik: undefined,
@@ -29,8 +34,12 @@ export default class Request extends React.Component {
     }
 
     postRequest = () => {
-        //TODO: check values
-        let init = {
+        if (!this.isAllFieldsOk()) {
+            this.setState({modal: {show: true, message: 'Одно или несколько полей заполнены некорректно'}})
+            return
+        }
+
+        const init = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -39,14 +48,33 @@ export default class Request extends React.Component {
             mode: 'cors'
         }
         fetch(`${apiBaseUrl}/api/payments/requests`, init)
-            .then(response => response.json)
-            .then(res => console.log(res))
-            //TODO: show user that all's goods
+            .then(response => response.json())
+            .then(res => this.setState({modal: {show: true, message: res.result}}))
+    }
+
+    isAllFieldsOk = () => {
+        return this.state.ok.inn &&
+               this.state.ok.bik &&
+               this.state.ok.account_number &&
+               this.state.ok.for_what &&
+               this.state.ok.amount &&
+               this.state.ok.phone &&
+               this.state.ok.email
+    }
+
+    closeModal = () => {
+        this.setState({modal: {show: false, message: undefined}})
     }
 
     render() {
         return (
             <div>
+                <Modal isOpen={this.state.modal.show}>
+                    <div>
+                        {this.state.modal.message}
+                    </div>
+                    <button onClick={this.closeModal}>Закрыть</button>
+                </Modal>
                 <header>
                     <strong>
                         Создайте платежку, а {this.props.status} {this.props.name} подпишет её у себя в интернет-банке
