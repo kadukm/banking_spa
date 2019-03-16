@@ -47,7 +47,7 @@ export default class PaymentViaBank extends React.Component {
                         .then(blob => {
                             var a = document.createElement('a');
                             a.href = window.URL.createObjectURL(blob);
-                            a.download = 'test.txt';
+                            a.download = 'payment.pdf';
                             document.body.appendChild(a);
                             a.click();
                             document.body.removeChild(a);
