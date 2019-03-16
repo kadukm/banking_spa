@@ -1,6 +1,11 @@
 # banking_spa
 Simple single-page application written on Golang+MongoDB+React
 
+## TODO
+[ ] Send request to payment via bank using GET-form, not fetch
+[ ] Add vendoring
+[ ] Move font-files to another directory
+
 ## backend API
 POST `/api/payments/from_card`
 ```
