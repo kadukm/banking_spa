@@ -14,17 +14,6 @@ POST `/api/payments/from_card`
 }
 ```
 
-POST `/api/payments/via_bank`
-```
-{
-    inn: "1234567890"                      | str, 10 or 12 digits
-    bik: "123456789"                       | str, 9 digits
-    account_number: "12345678901234567890" | str, 20 digits
-    for_what: "без НДС"                    | str, contains "без НДС" or "НДС 10%" or "НДС 18%"
-    amount: 7777                           | int, between 1000 and 75000
-}
-```
-
 POST `/api/payments/requests`
 ```
 {
@@ -37,6 +26,10 @@ POST `/api/payments/requests`
     email: "example@mail.com"              | str, with email pattern
 }
 ```
+
+GET `/api/payments/via_bank?inn&bik&account_number&for_what&amount`
+
+Fields in the query are the same as in `/api/payments/requests`
 
 PATCH `/api/payments/from_card/:paymentID`
 ```

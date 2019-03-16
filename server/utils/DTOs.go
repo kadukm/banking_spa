@@ -23,11 +23,11 @@ type PaymentRequestDTO struct {
 }
 
 type PaymentViaBankDTO struct {
-	INN           string `json:"inn"`
-	BIK           string `json:"bik"`
-	AccountNumber string `json:"account_number"`
-	ForWhat       string `json:"for_what"`
-	Amount        int    `json:"amount"`
+	INN           string `form:"inn"`
+	BIK           string `form:"bik"`
+	AccountNumber string `form:"account_number"`
+	ForWhat       string `form:"for_what"`
+	Amount        int    `form:"amount"`
 }
 
 type PatchPaymentFromCardDTO struct {

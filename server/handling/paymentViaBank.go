@@ -7,13 +7,9 @@ import (
 	"github.com/kadukm/banking_spa/server/utils"
 )
 
-func PostPaymentViaBank(c *gin.Context) {
-	if !utils.MIMEContentTypeIsJSON(c.Request) {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong Content-Type"})
-		return
-	}
+func GetPaymentViaBank(c *gin.Context) {
 	payment := utils.PaymentViaBankDTO{}
-	if err := c.ShouldBindJSON(&payment); err != nil {
+	if err := c.ShouldBindQuery(&payment); err != nil {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return
 	}
