@@ -29,28 +29,32 @@ export default class PaymentViaBank extends React.Component {
         }
     }
 
-    postPaymentViaBank = () => {
+    getPaymentViaBank = () => {
         if (!this.isAllFieldsOk()) {
             this.setState({modal: {show: true, message: 'Одно или несколько полей не заполнены или заполнены некорректно'}})
             return
         }
 
+        const query = utils.urlEncodeObject(this.state.data)
         const init = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.data),
+            method: "GET",
             mode: 'cors'
         }
-        fetch(`${apiBaseUrl}/api/payments/via_bank`, init)
-            .then(response => response.json())
-            .then(res => {
-                if (res.ok) {
-                    //TODO: download data
-                }
-                else {
-                    this.setState({modal: {show: true, message: res.result}})
+        fetch(`${apiBaseUrl}/api/payments/via_bank?${query}`, init)
+            .then(response => {
+                if (response.status === 200) {
+                    response.blob()
+                        .then(blob => {
+                            var a = document.createElement('a');
+                            a.href = window.URL.createObjectURL(blob);
+                            a.download = 'test.txt';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        })
+                } else {
+                    response.json()
+                        .then(res => this.setState({modal: {show: true, message: res.result}}))   
                 }
             })
     }
@@ -141,7 +145,7 @@ export default class PaymentViaBank extends React.Component {
                             value={this.state.data.amount}
                         />
                     </div>
-                    <button onClick={this.postPaymentViaBank}>Получить файл для интернет-банка</button>
+                    <button onClick={this.getPaymentViaBank}>Получить файл для интернет-банка</button>
                 </div>
             </div>
         )
