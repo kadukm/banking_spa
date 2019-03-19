@@ -9,6 +9,7 @@ Simple single-page application written on Golang+MongoDB+React
 - [ ] Add vendoring
 - [ ] Move font-files to another directory
 - [ ] Add swagger
+- [ ] Return payments in admin-panel by different pages
 
 ## backend API
 POST `/api/payments/from_card`
