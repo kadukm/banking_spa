@@ -78,6 +78,10 @@ func (product product) convertToProductDTO() utils.ProductDTO {
 }
 
 func convertToSortOption(sortDTO utils.MongoSortDTO) bson.D {
+	if sortDTO.Field == "" {
+		return bson.D{}
+	}
+
 	filterValue := 1
 	if sortDTO.Descending {
 		filterValue = -1
