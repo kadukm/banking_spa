@@ -22,3 +22,18 @@
 .products__info {
     margin-bottom: 15px;
 }
+
+.share {
+    padding-top: 20px;
+}
+
+.share__icons {
+    padding-top: 3px;
+    padding-left: 10px;
+    align-items: center;
+    display: flex;
+}
+
+.share__icon {
+    padding: 0 5px;
+}

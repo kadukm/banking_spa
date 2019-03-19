@@ -16,9 +16,17 @@ export default class Body extends React.Component {
 
     render() {
         return (
-            <section>
-                <button onClick={() => this.setState({isRequest: false})}>Заплатить</button>
-                <button onClick={() => this.setState({isRequest: true})}>Запросить платёж</button>
+            <section className="navbar__first-row">
+                <button className={"navbar__choice" + (this.state.isRequest ? "" : " button-selected")}
+                    onClick={() => this.setState({isRequest: false})}
+                >
+                    Заплатить
+                </button>
+                <button className={"navbar__choice" + (this.state.isRequest ? " button-selected" : "")}
+                    onClick={() => this.setState({isRequest: true})}
+                >
+                    Запросить платёж
+                </button>
                 {this.state.isRequest
                     ? <Request status={this.props.status} name={this.props.name}/>
                     : <Payment />}

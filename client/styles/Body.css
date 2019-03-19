@@ -12,6 +12,33 @@
     border-width: 0 0 2px 0;
 }
 
+.navbar__first-row {
+    line-height: 35px;
+}
+
+.navbar__second-row {
+    line-height: 20px;
+}
+
+.navbar__choice {
+    padding: 5px;
+    border: solid 1px;
+    margin: 0 10px 0 0;
+    border-radius: 2px;
+}
+
+.navbar__choice-second {
+    font-size: 75%;
+    margin: 0 10px 0 0;
+}
+
+.button-selected {
+    color: #666;
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 559px) {
     .standard-field {
         padding-right: 1px;
