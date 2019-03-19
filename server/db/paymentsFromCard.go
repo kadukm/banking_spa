@@ -27,11 +27,32 @@ func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string)
 	return
 }
 
-func GetPaymentsFromCard(sortDTO utils.MongoSortDTO) (res []*utils.PaymentFromCardDTO, err error) {
+func GetPaymentsFromCardSorted(sortDTO utils.MongoSortDTO) (res []*utils.PaymentFromCardDTO, err error) {
 	sort := convertToSortOption(sortDTO)
 	findOptions := options.Find().SetSort(sort)
 
 	cursor, err := paymentsFromCard.Find(context.TODO(), bson.M{}, findOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for cursor.Next(context.TODO()) {
+		var curPayment paymentFromCard
+		err = cursor.Decode(&curPayment)
+		if err != nil {
+			return nil, err
+		}
+		curPaymentDTO := curPayment.convertToPaymentFromCardDTO()
+		res = append(res, &curPaymentDTO)
+	}
+
+	cursor.Close(context.TODO())
+	return
+}
+
+func GetPaymentsFromCard(filterDTO utils.MongoFilterDTO) (res []*utils.PaymentFromCardDTO, err error) {
+	filter := convertToFilter(filterDTO)
+	cursor, err := paymentsFromCard.Find(context.TODO(), filter)
 	if err != nil {
 		return nil, err
 	}
