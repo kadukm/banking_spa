@@ -56,7 +56,7 @@ func buildAPIRoutes(engine *gin.Engine) {
 			//payments.GET("/from_card", handling.GetPaymentsFromCard)
 			payments.GET("/from_card/sort", handling.GetPaymentsFromCardSorted)
 			payments.PATCH("/from_card/:paymentID", handling.PatchPaymentFromCard)
-			//payments.GET("/requests", handling.GetPaymentRequests)
+			payments.GET("/requests", handling.GetPaymentRequests)
 			payments.GET("/requests/sort", handling.GetPaymentRequestsSorted)
 
 			payments.POST("/from_card", handling.PostPaymentFromCard)

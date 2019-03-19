@@ -57,3 +57,8 @@ type MongoSortDTO struct {
 	Field      string `form:"field"`
 	Descending bool   `form:"desc"`
 }
+
+type MongoFilterDTO struct {
+	Field string `form:"field"`
+	Value string `form:"value"`
+}

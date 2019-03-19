@@ -89,3 +89,10 @@ func convertToSortOption(sortDTO utils.MongoSortDTO) bson.D {
 
 	return bson.D{{sortDTO.Field, filterValue}}
 }
+
+func convertToFilter(filterDTO utils.MongoFilterDTO) (filter bson.M) {
+	if filterDTO.Field == "" {
+		return nil
+	}
+	return bson.M{filterDTO.Field: filterDTO.Value}
+}

@@ -9,8 +9,21 @@ import (
 	"github.com/kadukm/banking_spa/server/utils"
 )
 
+func GetPaymentRequestsSorted(c *gin.Context) {
+	sortOptions := utils.MongoSortDTO{}
+	if err := c.ShouldBindQuery(&sortOptions); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		return
+	}
+	if payments, err := db.GetPaymentRequestsSorted(sortOptions); err == nil {
+		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
+	} else {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+	}
+}
+
 func GetPaymentRequests(c *gin.Context) {
-	filter := utils.MongoSortDTO{}
+	filter := utils.MongoFilterDTO{}
 	if err := c.ShouldBindQuery(&filter); err != nil {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
 		return

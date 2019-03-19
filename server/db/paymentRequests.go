@@ -25,11 +25,32 @@ func GetCompany(companyID string) (res utils.CompanyDTO, err error) {
 	return
 }
 
-func GetPaymentRequests(sortDTO utils.MongoSortDTO) (res []*utils.PaymentRequestDTO, err error) {
+func GetPaymentRequestsSorted(sortDTO utils.MongoSortDTO) (res []*utils.PaymentRequestDTO, err error) {
 	sort := convertToSortOption(sortDTO)
 	findOptions := options.Find().SetSort(sort)
 
 	cursor, err := paymentRequests.Find(context.TODO(), bson.M{}, findOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for cursor.Next(context.TODO()) {
+		var curPayment paymentRequest
+		err = cursor.Decode(&curPayment)
+		if err != nil {
+			return nil, err
+		}
+		curPaymentDTO := curPayment.convertToPaymentRequestDTO()
+		res = append(res, &curPaymentDTO)
+	}
+
+	cursor.Close(context.TODO())
+	return
+}
+
+func GetPaymentRequests(filterDTO utils.MongoFilterDTO) (res []*utils.PaymentRequestDTO, err error) {
+	filter := convertToFilter(filterDTO)
+	cursor, err := paymentRequests.Find(context.TODO(), filter)
 	if err != nil {
 		return nil, err
 	}
