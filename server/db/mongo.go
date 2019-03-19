@@ -60,9 +60,7 @@ func GetCompany(companyID string) (res utils.CompanyDTO, err error) {
 
 func GetProducts(companyID string, maxCount int64) (res []*utils.ProductDTO, err error) {
 	filter := bson.M{"company_id": companyID}
-
-	findOptions := options.Find()
-	findOptions.SetLimit(maxCount)
+	findOptions := options.Find().SetLimit(maxCount)
 
 	cursor, err := products.Find(context.TODO(), filter, findOptions)
 	if err != nil {
@@ -81,6 +79,29 @@ func GetProducts(companyID string, maxCount int64) (res []*utils.ProductDTO, err
 
 	if err = cursor.Err(); err != nil {
 		return nil, err
+	}
+
+	cursor.Close(context.TODO())
+	return
+}
+
+func GetPaymentsFromCard(sortDTO utils.MongoSortDTO) (res []*utils.PaymentFromCardDTO, err error) {
+	sort := convertToSortOption(sortDTO)
+	findOptions := options.Find().SetSort(sort)
+
+	cursor, err := paymentsFromCard.Find(context.TODO(), bson.M{}, findOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for cursor.Next(context.TODO()) {
+		var curPayment paymentFromCard
+		err = cursor.Decode(&curPayment)
+		if err != nil {
+			return nil, err
+		}
+		curPaymentDTO := curPayment.convertToPaymentFromCardDTO()
+		res = append(res, &curPaymentDTO)
 	}
 
 	cursor.Close(context.TODO())

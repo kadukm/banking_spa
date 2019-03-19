@@ -8,6 +8,19 @@ import (
 	"github.com/kadukm/banking_spa/server/utils"
 )
 
+func GetPaymentsFromCard(c *gin.Context) {
+	filter := utils.MongoSortDTO{}
+	if err := c.ShouldBindQuery(&filter); err != nil {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		return
+	}
+	if payments, err := db.GetPaymentsFromCard(filter); err == nil {
+		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
+	} else {
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+	}
+}
+
 func PostPaymentFromCard(c *gin.Context) {
 	if !utils.MIMEContentTypeIsJSON(c.Request) {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong Content-Type"})

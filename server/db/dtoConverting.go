@@ -2,10 +2,24 @@ package db
 
 import (
 	"github.com/kadukm/banking_spa/server/utils"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func convertToPaymentFromCard(payment utils.PaymentFromCardDTO) paymentFromCard {
 	return paymentFromCard{
+		CardNumber:  payment.CardNumber,
+		CardExpires: payment.CardExpires,
+		CardCVC:     payment.CardCVC,
+		Amount:      payment.Amount,
+		Comment:     payment.Comment,
+		Email:       payment.Email,
+		Dangerous:   payment.Dangerous,
+	}
+}
+
+func (payment paymentFromCard) convertToPaymentFromCardDTO() utils.PaymentFromCardDTO {
+	return utils.PaymentFromCardDTO{
+		ID:          payment.ID.Hex(),
 		CardNumber:  payment.CardNumber,
 		CardExpires: payment.CardExpires,
 		CardCVC:     payment.CardCVC,
@@ -49,4 +63,13 @@ func (product product) convertToProductDTO() utils.ProductDTO {
 		ImagePath: product.ImagePath,
 		Price:     product.Price,
 	}
+}
+
+func convertToSortOption(sortDTO utils.MongoSortDTO) bson.D {
+	filterValue := 1
+	if sortDTO.Descending {
+		filterValue = -1
+	}
+
+	return bson.D{{sortDTO.Field, filterValue}}
 }

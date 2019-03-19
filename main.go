@@ -53,10 +53,12 @@ func buildAPIRoutes(engine *gin.Engine) {
 	{
 		payments := api.Group("/payments")
 		{
+			payments.GET("/from_card", handling.GetPaymentsFromCard)
+			payments.PATCH("/from_card/:paymentID", handling.PatchPaymentFromCard)
+
 			payments.POST("/from_card", handling.PostPaymentFromCard)
 			payments.POST("/requests", handling.PostPaymentRequest)
 			payments.GET("/via_bank", handling.GetPaymentViaBank)
-			payments.PATCH("/from_card/:paymentID", handling.PatchPaymentFromCard)
 		}
 		companies := api.Group("/companies")
 		{

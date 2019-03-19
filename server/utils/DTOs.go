@@ -52,3 +52,8 @@ type ProductDTO struct {
 	ImagePath string `json:"image_path"`
 	Price     string `json:"price"`
 }
+
+type MongoSortDTO struct {
+	Field      string `form:"field"`
+	Descending bool   `form:"desc"`
+}
