@@ -5,6 +5,7 @@ Simple single-page application written on Golang+MongoDB+React
 - [ ] Send request to payment via bank using GET-form, not fetch
 - [ ] Add vendoring
 - [ ] Move font-files to another directory
+- [ ] Add swagger
 
 ## backend API
 POST `/api/payments/from_card`
