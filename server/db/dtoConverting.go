@@ -44,6 +44,7 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 
 func (payment paymentRequest) convertToPaymentRequestDTO() utils.PaymentRequestDTO {
 	return utils.PaymentRequestDTO{
+		ID:            payment.ID.Hex(),
 		INN:           payment.INN,
 		BIK:           payment.BIK,
 		AccountNumber: payment.AccountNumber,
