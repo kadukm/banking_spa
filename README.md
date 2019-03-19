@@ -10,6 +10,7 @@ Simple single-page application written on Golang+MongoDB+React
 - [ ] Move font-files to another directory
 - [ ] Add swagger
 - [ ] Return payments in admin-panel by different pages
+- [ ] Don't use `err.Error()` in ServerResponses
 
 ## backend API
 POST `/api/payments/from_card`
