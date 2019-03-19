@@ -53,9 +53,9 @@ GET `/api/payments/from_card?field=<field_name>&value=<value>`
 
 GET `/api/payments/requests?field=<field_name>&value=<value>`
 
-GET `/api/payments/from_card?field=<field_name>&desc=<bool_value>`
+GET `/api/payments/from_card/sort?field=<field_name>&desc=<bool_value>`
 
-GET `/api/payments/requests?field=<field_name>&desc=<bool_value>`
+GET `/api/payments/requests/sort?field=<field_name>&desc=<bool_value>`
 
 GET `/api/copmanies/:companyID`
 
