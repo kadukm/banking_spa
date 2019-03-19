@@ -145,7 +145,11 @@ export default class PaymentViaBank extends React.Component {
                             value={this.state.data.amount}
                         />
                     </div>
-                    <button onClick={this.getPaymentViaBank}>Получить файл для интернет-банка</button>
+                    <button className="button-tochka"
+                        onClick={this.getPaymentViaBank}
+                    >
+                        Получить файл для интернет-банка
+                    </button>
                 </div>
             </div>
         )

@@ -163,7 +163,11 @@ export default class Request extends React.Component {
                             value={this.state.data.email}
                        />
                     </div>
-                    <button onClick={this.postRequest}>Заплатить</button>
+                    <button className="button-tochka"
+                        onClick={this.postRequest}
+                    >
+                        Заплатить
+                    </button>
                 </div>
             </div>
         )

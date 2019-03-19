@@ -1,3 +1,19 @@
-.test {
-    background-color: #deefed;
+.button-tochka {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #4879ff;
+    /* margin: 15px 0 0 0; */
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 500;
+    color: #4879ff;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.button-tochka:hover {
+    color: #000000;
+    background-color: #dde2d6;
+    border: 0.1em solid #000000;
 }

@@ -152,7 +152,11 @@ export default class PaymentFromCard extends React.Component {
                                 value={this.state.data.email}
                             />
                         </div>
-                        <button onClick={this.postPayment}>Заплатить</button>
+                        <button className="button-tochka"
+                            onClick={this.postPayment}
+                        >
+                            Заплатить
+                        </button>
                     </div>
                 </div>
             </div>
