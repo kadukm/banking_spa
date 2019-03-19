@@ -1,6 +1,7 @@
 import React from 'react';
 import Requests from './Requests.jsx'
 import PaymentsFromCard from './PaymentsFromCard.jsx'
+import '../../styles/AdminPanel.css'
 
 export default class AdminPanel extends React.Component {
     constructor(props) {
@@ -10,10 +11,16 @@ export default class AdminPanel extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.setState({isRequests: false})}>
+                <button
+                    className=""
+                    onClick={() => this.setState({isRequests: false})}
+                >
                     Платежи с карты
                 </button>
-                <button onClick={() => this.setState({isRequests: true})}>
+                <button
+                    className=""
+                    onClick={() => this.setState({isRequests: true})}
+                >
                     Запрошенные платежи
                 </button>
                 {this.state.isRequests

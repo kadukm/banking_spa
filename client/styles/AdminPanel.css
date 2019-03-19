@@ -1,0 +1,27 @@
+.table {
+    display: table;
+    border-collapse: collapse;
+    margin: 30px 0 0 0;
+    transition-duration: 1s;
+    animation-duration: 1s;
+}
+
+.table__row {
+    display: table-row;
+}
+
+.table__cell {
+    display: table-cell;
+    text-align: center;
+    padding: 2px 10px;
+    border: 1px solid #ccc;
+}
+
+.table__key {
+    background-color: #4879ff4f;
+}
+
+
+.dangerous {
+    background-color: rgba(255, 0, 0, 0.466);
+}
