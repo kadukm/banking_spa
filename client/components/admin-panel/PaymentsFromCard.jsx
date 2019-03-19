@@ -31,7 +31,7 @@ export default class PaymentsFromCard extends React.Component {
     }
 
     buildUrlForFilter = () => {
-        const query = this.state.filter.field == '' ? '' : `?field=${this.state.filter.field}&value=${this.state.filter.value}`
+        const query = this.state.filter.field == '' ? '' : `?field=${this.state.filter.field}&value=${encodeURIComponent(this.state.filter.value)}`
         return paymentFromCardApiPath + query
     }
 
