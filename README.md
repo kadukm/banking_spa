@@ -2,6 +2,9 @@
 Simple single-page application written on Golang+MongoDB+React
 
 ## TODO
+- [ ] Add authorization
+- - [ ] for common users
+- - [ ] for admins
 - [ ] Send request to payment via bank using GET-form, not fetch
 - [ ] Add vendoring
 - [ ] Move font-files to another directory
