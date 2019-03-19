@@ -2,7 +2,7 @@ import React from 'react';
 import apiBaseUrl from '../../config.js'
 import {TableKey, TableCell} from '../utils/TableItems.jsx'
 
-const paymentRequestApiPath = `${apiBaseUrl}/api/payments/from_card`
+const paymentFromCardApiPath = `${apiBaseUrl}/api/payments/from_card`
 const paymentFields = ['id', 'card_number', 'card_expires', 'card_cvc', 'amount', 'comment', 'email', 'dangerous']
 
 export default class PaymentsFromCard extends React.Component {
@@ -22,17 +22,17 @@ export default class PaymentsFromCard extends React.Component {
     }
 
     componentDidMount() {
-        this.updatePaymentsTable(paymentRequestApiPath)
+        this.updatePaymentsTable(paymentFromCardApiPath)
     }
 
     buildUrlForSort = () => {
         const query = this.state.sort.field == '' ? '' : `?field=${this.state.sort.field}&desc=${this.state.sort.desc}`
-        return `${paymentRequestApiPath}/sort${query}`
+        return `${paymentFromCardApiPath}/sort${query}`
     }
 
     buildUrlForFilter = () => {
         const query = this.state.filter.field == '' ? '' : `?field=${this.state.filter.field}&value=${this.state.filter.value}`
-        return paymentRequestApiPath + query
+        return paymentFromCardApiPath + query
     }
 
     getSortedPayments = () => {
@@ -64,7 +64,7 @@ export default class PaymentsFromCard extends React.Component {
             method: "PATCH",
             body: JSON.stringify({dangerous: paymentDangerousNewValue})
         }
-        fetch(`${paymentRequestApiPath}/${paymentID}`, init)
+        fetch(`${paymentFromCardApiPath}/${paymentID}`, init)
             .then(response => response.json())
             .then(res => {
                 if (res.ok) {
