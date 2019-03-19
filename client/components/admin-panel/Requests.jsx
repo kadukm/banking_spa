@@ -1,5 +1,6 @@
 import React from 'react';
 import apiBaseUrl from '../../config.js'
+import Modal from 'react-modal'
 import {TableKey, TableCell} from '../utils/TableItems.jsx'
 
 const paymentRequestApiPath = `${apiBaseUrl}/api/payments/requests`
@@ -9,6 +10,10 @@ export default class Requests extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            modal: {
+                show: false,
+                message: undefined
+            },
             payments: null,
             sort: {
                 field: '',
@@ -23,6 +28,10 @@ export default class Requests extends React.Component {
 
     componentDidMount() {
         this.updatePaymentsTable(paymentRequestApiPath)
+    }
+
+    closeModal = () => {
+        this.setState({modal: {show: false, message: undefined}})
     }
 
     buildUrlForSort = () => {
@@ -52,7 +61,7 @@ export default class Requests extends React.Component {
                 if (res.ok) {
                     this.setState({payments: res.result})
                 } else {
-                    //TODO: show modal
+                    this.setState({modal: {show: true, message: res.result}})
                 }
             })
     }
@@ -60,6 +69,12 @@ export default class Requests extends React.Component {
     render() {
         return (
             <div>
+                <Modal isOpen={this.state.modal.show}>
+                    <div>
+                        {this.state.modal.message}
+                    </div>
+                    <button onClick={this.closeModal}>Закрыть</button>
+                </Modal>
                 <div>
                     <div>
                         <input

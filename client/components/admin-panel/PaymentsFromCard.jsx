@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal'
 import apiBaseUrl from '../../config.js'
 import {TableKey, TableCell} from '../utils/TableItems.jsx'
 
@@ -9,6 +10,10 @@ export default class PaymentsFromCard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            modal: {
+                show: false,
+                message: undefined
+            },
             payments: null,
             sort: {
                 field: '',
@@ -23,6 +28,10 @@ export default class PaymentsFromCard extends React.Component {
 
     componentDidMount() {
         this.updatePaymentsTable(paymentFromCardApiPath)
+    }
+
+    closeModal = () => {
+        this.setState({modal: {show: false, message: undefined}})
     }
 
     buildUrlForSort = () => {
@@ -52,7 +61,7 @@ export default class PaymentsFromCard extends React.Component {
                 if (res.ok) {
                     this.setState({payments: res.result})
                 } else {
-                    //TODO: show modal
+                    this.setState({modal: {show: true, message: res.result}})
                 }
             })
     }
@@ -71,7 +80,7 @@ export default class PaymentsFromCard extends React.Component {
                     this.state.payments[paymentIdx].dangerous = paymentDangerousNewValue
                     this.setState({payments: this.state.payments})
                 } else {
-                    //TODO: show modal
+                    this.setState({modal: {show: true, message: res.result}})
                 }
             })
     }
@@ -79,6 +88,12 @@ export default class PaymentsFromCard extends React.Component {
     render() {
         return (
             <div>
+                <Modal isOpen={this.state.modal.show}>
+                    <div>
+                        {this.state.modal.message}
+                    </div>
+                    <button onClick={this.closeModal}>Закрыть</button>
+                </Modal>
                 <div>
                     <div>
                         <input
