@@ -42,6 +42,18 @@ func convertToPaymentRequest(payment utils.PaymentRequestDTO) paymentRequest {
 	}
 }
 
+func (payment paymentRequest) convertToPaymentRequestDTO() utils.PaymentRequestDTO {
+	return utils.PaymentRequestDTO{
+		INN:           payment.INN,
+		BIK:           payment.BIK,
+		AccountNumber: payment.AccountNumber,
+		ForWhat:       payment.ForWhat,
+		Amount:        payment.Amount,
+		Phone:         payment.Phone,
+		Email:         payment.Email,
+	}
+}
+
 func (company company) convertToCompanyDTO() utils.CompanyDTO {
 	return utils.CompanyDTO{
 		Status:         company.Status,

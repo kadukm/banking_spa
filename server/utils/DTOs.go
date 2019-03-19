@@ -12,7 +12,7 @@ type PaymentFromCardDTO struct {
 }
 
 type PaymentRequestDTO struct {
-	ID            string `json:"id"`
+	ID            string `json:"id,omitempty"`
 	INN           string `json:"inn"`
 	BIK           string `json:"bik"`
 	AccountNumber string `json:"account_number"`
