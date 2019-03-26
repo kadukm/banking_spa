@@ -1,3 +1,5 @@
+const ndsValues = ["НДС 18%", "НДС 10%", "без НДС"]
+
 export function urlEncodeObject(obj) {
     var str = [];
     for (var p in obj)
@@ -5,6 +7,16 @@ export function urlEncodeObject(obj) {
             str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         }
     return str.join("&");
+}
+
+export function handleNds(currentNdsValue, inputValue) {
+    var newInputValue = inputValue
+    for (let ndsValue of ndsValues) {
+        newInputValue = newInputValue.replace(ndsValue, "")
+    }
+    newInputValue = newInputValue.replace(/ $/, "")
+    newInputValue = newInputValue + ' ' + currentNdsValue
+    return newInputValue.replace(/^ /, "")
 }
 
 export function prepareInn(value) {

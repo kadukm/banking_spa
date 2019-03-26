@@ -132,6 +132,11 @@ export default class PaymentViaBank extends React.Component {
                             onBlur={this.onBlurForWhat}
                             value={this.state.data.for_what}
                         />
+                        <div className="nds-options">
+                            <button onClick={() => this.onClickNdsButton("НДС 18%")}>НДС 18%</button>
+                            <button onClick={() => this.onClickNdsButton("НДС 10%")}>НДС 10%</button>
+                            <button onClick={() => this.onClickNdsButton("без НДС")}>без НДС</button>
+                        </div>
                     </div>
                     <div className="standard-field">
                         <label htmlFor="amount">Сколько</label>
@@ -153,6 +158,13 @@ export default class PaymentViaBank extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    onClickNdsButton = (ndsValue) => {
+        const value = utils.handleNds(ndsValue, this.state.data.for_what)
+        this.setState({data: {...this.state.data, for_what: value}})
+        const forWhatOk = utils.isForWhatOk(value)
+        this.setState({ok: {...this.state.ok, for_what: forWhatOk}})
     }
 
     onChangeInn = (event) => {

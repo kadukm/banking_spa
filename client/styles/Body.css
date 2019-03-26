@@ -2,6 +2,18 @@
     background-color: #EC8F8F;
 }
 
+.nds-options {
+    width: 100%;
+    float: right;
+    text-align: right;
+}
+
+.nds-options button {
+    border: 0;
+    background-color: transparent;
+    color: blue;
+}
+
 .standard-field {
     padding-right: 10%;
     overflow: hidden;
