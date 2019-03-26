@@ -13,17 +13,19 @@ export default class Payment extends React.Component {
 
     render() {
         return (
-            <div className="navbar__second-row">
-                <button className={"navbar__choice-second" + (this.state.fromCard ? " button-selected" : "")}
-                    onClick={() => this.setState({fromCard: true})}
-                >
-                    💳 С карты любого банка
-                </button>
-                <button className={"navbar__choice-second" + (this.state.fromCard ? "" : " button-selected")}
-                    onClick={() => this.setState({fromCard: false})}
-                >
-                    💻 Из своего интернет-банка
-                </button>
+            <div>
+                <div className="navbar__second-row">
+                    <button className={"navbar__choice-second" + (this.state.fromCard ? " button-selected" : "")}
+                        onClick={() => this.setState({fromCard: true})}
+                    >
+                        💳 С карты любого банка
+                    </button>
+                    <button className={"navbar__choice-second" + (this.state.fromCard ? "" : " button-selected")}
+                        onClick={() => this.setState({fromCard: false})}
+                    >
+                        💻 Из своего интернет-банка
+                    </button>
+                </div>
                 {this.state.fromCard
                     ? <PaymentFromCard />
                     : <PaymentViaBank />}
