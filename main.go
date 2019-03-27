@@ -6,6 +6,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/handling"
+	"github.com/kadukm/banking_spa/server/utils"
 )
 
 func main() {
@@ -31,7 +32,8 @@ func runAPIEngine() {
 	apiEngine := gin.Default()
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:8080"}
-	config.AllowHeaders = []string{"Content-Type"}
+	config.AllowHeaders = []string{"Content-Type", utils.CSRFTokenName}
+	config.AllowCredentials = true
 	apiEngine.Use(cors.New(config))
 	buildAPIRoutes(apiEngine)
 	apiEngine.Run(":3000")
@@ -42,10 +44,9 @@ func buildCommonRoutes(engine *gin.Engine) {
 		c.File("./index.html")
 	}
 	engine.Static("/assets", "./assets")
-	engine.StaticFile("/admin-panel", "./index.html")
-	engine.StaticFile("/", "./index.html")
-	engine.GET("/companies/:companyID", indexHandler)
-	engine.HEAD("/companies/:companyID", indexHandler)
+	engine.GET("/admin-panel", utils.CSRFGeneration, indexHandler)
+	engine.GET("/", utils.CSRFGeneration, indexHandler)
+	engine.GET("/companies/:companyID", utils.CSRFGeneration, indexHandler)
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
@@ -55,12 +56,13 @@ func buildAPIRoutes(engine *gin.Engine) {
 		{
 			payments.GET("/from_card", handling.GetPaymentsFromCard)
 			payments.GET("/from_card/sort", handling.GetPaymentsFromCardSorted)
-			payments.PATCH("/from_card/:paymentID", handling.PatchPaymentFromCard)
 			payments.GET("/requests", handling.GetPaymentRequests)
 			payments.GET("/requests/sort", handling.GetPaymentRequestsSorted)
 
-			payments.POST("/from_card", handling.PostPaymentFromCard)
-			payments.POST("/requests", handling.PostPaymentRequest)
+			payments.PATCH("/from_card/:paymentID", utils.CheckCSRFToken, handling.PatchPaymentFromCard)
+
+			payments.POST("/from_card", utils.CheckCSRFToken, handling.PostPaymentFromCard)
+			payments.POST("/requests", utils.CheckCSRFToken, handling.PostPaymentRequest)
 			payments.GET("/via_bank", handling.GetPaymentViaBank)
 		}
 		companies := api.Group("/companies")

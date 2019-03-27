@@ -39,11 +39,14 @@ export default class Request extends React.Component {
             return
         }
 
+        const csrfToken = utils.getCookie(utils.csrfTokenName)
         const init = {
             method: "POST",
             headers: {
+                [utils.csrfTokenName]: csrfToken,
                 'Content-Type': 'application/json'
             },
+            credentials: "include",
             body: JSON.stringify(this.state.data),
             mode: 'cors'
         }

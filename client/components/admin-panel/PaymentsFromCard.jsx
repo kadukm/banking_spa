@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal'
 import apiBaseUrl from '../../config.js'
+import * as utils from '../../utils.js'
 import {TableKey, TableCell} from '../utils/TableItems.jsx'
 
 const paymentFromCardApiPath = `${apiBaseUrl}/api/payments/from_card`
@@ -69,9 +70,16 @@ export default class PaymentsFromCard extends React.Component {
     patchPayment = (paymentIdx) => {
         const paymentID = this.state.payments[paymentIdx].id
         const paymentDangerousNewValue = !this.state.payments[paymentIdx].dangerous
+        const csrfToken = utils.getCookie(utils.csrfTokenName)
         const init = {
             method: "PATCH",
-            body: JSON.stringify({dangerous: paymentDangerousNewValue})
+            headers: {
+                [utils.csrfTokenName]: csrfToken,
+                'Content-Type': 'application/json'
+            },
+            credentials: "include",
+            body: JSON.stringify({dangerous: paymentDangerousNewValue}),
+            mode: "cors"
         }
         fetch(`${paymentFromCardApiPath}/${paymentID}`, init)
             .then(response => response.json())
