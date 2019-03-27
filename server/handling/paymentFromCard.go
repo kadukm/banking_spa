@@ -68,7 +68,7 @@ func PatchPaymentFromCard(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "All is ok c:"})
+	c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: "Платеж успешно обновлен"})
 }
 
 func paymentFromCardIsRight(payment utils.PaymentFromCardDTO) bool {
