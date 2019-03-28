@@ -2,7 +2,6 @@
 Simple single-page application written on Golang+MongoDB+React
 
 ## TODO
-- [ ] Add authorization for admins
 - [ ] Send request to payment via bank using GET-form, not fetch
 - [ ] Add vendoring
 - [ ] Add opportunity to search in admin-panel by non-string fields
