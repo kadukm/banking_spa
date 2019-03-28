@@ -55,7 +55,7 @@ export default class Requests extends React.Component {
     }
 
     updatePaymentsTable = (url) => {
-        fetch(url)
+        fetch(url, {credentials: "include"})
             .then(response => response.json())
             .then(res => {
                 if (res.ok) {

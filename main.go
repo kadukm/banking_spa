@@ -55,12 +55,12 @@ func buildAPIRoutes(engine *gin.Engine) {
 	{
 		payments := api.Group("/payments")
 		{
-			payments.GET("/from_card", handling.GetPaymentsFromCard)
-			payments.GET("/from_card/sort", handling.GetPaymentsFromCardSorted)
-			payments.GET("/requests", handling.GetPaymentRequests)
-			payments.GET("/requests/sort", handling.GetPaymentRequestsSorted)
+			payments.GET("/from_card", handling.CheckSession, handling.GetPaymentsFromCard)
+			payments.GET("/from_card/sort", handling.CheckSession, handling.GetPaymentsFromCardSorted)
+			payments.GET("/requests", handling.CheckSession, handling.GetPaymentRequests)
+			payments.GET("/requests/sort", handling.CheckSession, handling.GetPaymentRequestsSorted)
 
-			payments.PATCH("/from_card/:paymentID", handling.CheckCSRFToken, handling.PatchPaymentFromCard)
+			payments.PATCH("/from_card/:paymentID", handling.CheckSession, handling.CheckCSRFToken, handling.PatchPaymentFromCard)
 
 			payments.POST("/from_card", handling.CheckCSRFToken, handling.PostPaymentFromCard)
 			payments.POST("/requests", handling.CheckCSRFToken, handling.PostPaymentRequest)
