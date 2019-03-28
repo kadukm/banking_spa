@@ -62,3 +62,8 @@ type MongoFilterDTO struct {
 	Field string `form:"field"`
 	Value string `form:"value"`
 }
+
+type UserInfoDTO struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
+}

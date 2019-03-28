@@ -2,6 +2,13 @@ package db
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
+type User struct {
+	Login string `bson:"login"`
+	Salt  string `bson:"salt"`
+	Role  string `bson:"role"`
+	Hash  string `bosn:"hash"`
+}
+
 type paymentFromCard struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty"`
 	CardNumber  string             `bson:"card_number"`

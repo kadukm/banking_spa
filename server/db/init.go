@@ -11,6 +11,7 @@ var paymentsFromCard mongo.Collection
 var paymentRequests mongo.Collection
 var companies mongo.Collection
 var products mongo.Collection
+var users mongo.Collection
 
 func init() {
 	client, _ := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
@@ -19,4 +20,5 @@ func init() {
 	paymentRequests = *db.Collection("payment-requests")
 	companies = *db.Collection("companies")
 	products = *db.Collection("products")
+	users = *db.Collection("users")
 }

@@ -6,7 +6,6 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/kadukm/banking_spa/server/handling"
-	"github.com/kadukm/banking_spa/server/utils"
 )
 
 func main() {
@@ -32,7 +31,7 @@ func runAPIEngine() {
 	apiEngine := gin.Default()
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:8080"}
-	config.AllowHeaders = []string{"Content-Type", utils.CSRFTokenName}
+	config.AllowHeaders = []string{"Content-Type", handling.CSRFTokenName}
 	config.AllowCredentials = true
 	apiEngine.Use(cors.New(config))
 	buildAPIRoutes(apiEngine)
@@ -44,9 +43,11 @@ func buildCommonRoutes(engine *gin.Engine) {
 		c.File("./index.html")
 	}
 	engine.Static("/assets", "./assets")
-	engine.GET("/admin-panel", utils.CSRFGeneration, indexHandler)
-	engine.GET("/", utils.CSRFGeneration, indexHandler)
-	engine.GET("/companies/:companyID", utils.CSRFGeneration, indexHandler)
+	engine.GET("/", handling.CSRFGeneration, indexHandler)
+	engine.GET("/login", handling.CSRFGeneration, indexHandler)
+	engine.POST("/login", handling.Login)
+	engine.GET("/companies/:companyID", handling.CSRFGeneration, indexHandler)
+	engine.GET("/admin-panel", handling.CheckSession, handling.CSRFGeneration, indexHandler)
 }
 
 func buildAPIRoutes(engine *gin.Engine) {
@@ -59,10 +60,10 @@ func buildAPIRoutes(engine *gin.Engine) {
 			payments.GET("/requests", handling.GetPaymentRequests)
 			payments.GET("/requests/sort", handling.GetPaymentRequestsSorted)
 
-			payments.PATCH("/from_card/:paymentID", utils.CheckCSRFToken, handling.PatchPaymentFromCard)
+			payments.PATCH("/from_card/:paymentID", handling.CheckCSRFToken, handling.PatchPaymentFromCard)
 
-			payments.POST("/from_card", utils.CheckCSRFToken, handling.PostPaymentFromCard)
-			payments.POST("/requests", utils.CheckCSRFToken, handling.PostPaymentRequest)
+			payments.POST("/from_card", handling.CheckCSRFToken, handling.PostPaymentFromCard)
+			payments.POST("/requests", handling.CheckCSRFToken, handling.PostPaymentRequest)
 			payments.GET("/via_bank", handling.GetPaymentViaBank)
 		}
 		companies := api.Group("/companies")

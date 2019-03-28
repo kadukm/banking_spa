@@ -54,7 +54,7 @@ export default class PaymentViaBank extends React.Component {
                         })
                 } else {
                     response.json()
-                        .then(res => this.setState({modal: {show: true, message: res.result}}))   
+                        .then(res => this.setState({modal: {show: true, message: res.result}}))
                 }
             })
     }
