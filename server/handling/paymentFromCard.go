@@ -11,26 +11,26 @@ import (
 func GetPaymentsFromCardSorted(c *gin.Context) {
 	sortOptions := utils.MongoSortDTO{}
 	if err := c.ShouldBindQuery(&sortOptions); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if payments, err := db.GetPaymentsFromCardSorted(sortOptions); err == nil {
 		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
 	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Ошибка при получении платежей"})
 	}
 }
 
 func GetPaymentsFromCard(c *gin.Context) {
 	filter := utils.MongoFilterDTO{}
 	if err := c.ShouldBindQuery(&filter); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if payments, err := db.GetPaymentsFromCard(filter); err == nil {
 		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
 	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Ошибка при получении платежей"})
 	}
 }
 
@@ -41,7 +41,7 @@ func PostPaymentFromCard(c *gin.Context) {
 	}
 	request := utils.PaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if !paymentFromCardIsRight(request) {
@@ -49,7 +49,7 @@ func PostPaymentFromCard(c *gin.Context) {
 		return
 	}
 	if err := db.AddNewPaymentFromCard(request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно добавить платеж"})
 		return
 	}
 
@@ -60,11 +60,11 @@ func PatchPaymentFromCard(c *gin.Context) {
 	paymentID := c.Param("paymentID")
 	patch := utils.PatchPaymentFromCardDTO{}
 	if err := c.ShouldBindJSON(&patch); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if err := db.PatchPaymentFromCard(patch, paymentID); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно обработать платеж"})
 		return
 	}
 

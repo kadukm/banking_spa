@@ -30,12 +30,12 @@ func init() {
 func Login(c *gin.Context) {
 	userInfoDTO := utils.UserInfoDTO{}
 	if err := c.BindJSON(&userInfoDTO); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Unexpected error"})
 		return
 	}
 	user, err := db.GetUser(userInfoDTO.Login)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Неверный логин или пароль"})
 		return
 	}
 	calculatedHash := calculateHash(user.Salt, userInfoDTO.Password)
@@ -59,7 +59,7 @@ func CheckSession(c *gin.Context) {
 		login := sid2login[sid]
 		user, err := db.GetUser(login)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+			c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Incorrect CSRF-token"})
 		}
 		if user.Role != "admin" {
 			c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Access denie"})

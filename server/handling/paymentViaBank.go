@@ -13,11 +13,11 @@ import (
 func GetPaymentViaBank(c *gin.Context) {
 	payment := utils.PaymentViaBankDTO{}
 	if err := c.ShouldBindQuery(&payment); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 	} else if !paymentViaBankIsRight(payment) {
 		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "wrong data"})
 	} else if err := buildPaymentViaBankPDF(payment, c.Writer); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно получить платежку"})
 	}
 }
 

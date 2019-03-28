@@ -8,6 +8,6 @@ import (
 
 func GetUser(login string) (user User, err error) {
 	filter := bson.M{"login": login}
-	err = users.FindOne(context.TODO(), filter).Decode(&user)
+	err = users.FindOne(context.Background(), filter).Decode(&user)
 	return
 }

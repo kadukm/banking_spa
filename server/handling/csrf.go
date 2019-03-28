@@ -23,7 +23,7 @@ func CheckCSRFToken(c *gin.Context) {
 	tokenFromHeader := c.GetHeader(CSRFTokenName)
 	tokenFromCookie, err := c.Cookie(CSRFTokenName)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Unexpected error"})
 	} else if tokenFromHeader != tokenFromCookie {
 		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Wrong CSRF Token"})
 	}

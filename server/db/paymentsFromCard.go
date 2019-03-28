@@ -12,7 +12,7 @@ import (
 
 func AddNewPaymentFromCard(payment utils.PaymentFromCardDTO) error {
 	res := convertToPaymentFromCard(payment)
-	_, err := paymentsFromCard.InsertOne(context.TODO(), res)
+	_, err := paymentsFromCard.InsertOne(context.Background(), res)
 	return err
 }
 
@@ -23,7 +23,7 @@ func PatchPaymentFromCard(patch utils.PatchPaymentFromCardDTO, paymentID string)
 	}
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": patch}
-	_, err = paymentsFromCard.UpdateOne(context.TODO(), filter, update)
+	_, err = paymentsFromCard.UpdateOne(context.Background(), filter, update)
 	return
 }
 
@@ -31,12 +31,12 @@ func GetPaymentsFromCardSorted(sortDTO utils.MongoSortDTO) (res []*utils.Payment
 	sort := convertToSortOption(sortDTO)
 	findOptions := options.Find().SetSort(sort)
 
-	cursor, err := paymentsFromCard.Find(context.TODO(), bson.M{}, findOptions)
+	cursor, err := paymentsFromCard.Find(context.Background(), bson.M{}, findOptions)
 	if err != nil {
 		return nil, err
 	}
 
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(context.Background()) {
 		var curPayment paymentFromCard
 		err = cursor.Decode(&curPayment)
 		if err != nil {
@@ -46,18 +46,18 @@ func GetPaymentsFromCardSorted(sortDTO utils.MongoSortDTO) (res []*utils.Payment
 		res = append(res, &curPaymentDTO)
 	}
 
-	cursor.Close(context.TODO())
+	cursor.Close(context.Background())
 	return
 }
 
 func GetPaymentsFromCard(filterDTO utils.MongoFilterDTO) (res []*utils.PaymentFromCardDTO, err error) {
 	filter := convertToFilter(filterDTO)
-	cursor, err := paymentsFromCard.Find(context.TODO(), filter)
+	cursor, err := paymentsFromCard.Find(context.Background(), filter)
 	if err != nil {
 		return nil, err
 	}
 
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(context.Background()) {
 		var curPayment paymentFromCard
 		err = cursor.Decode(&curPayment)
 		if err != nil {
@@ -67,6 +67,6 @@ func GetPaymentsFromCard(filterDTO utils.MongoFilterDTO) (res []*utils.PaymentFr
 		res = append(res, &curPaymentDTO)
 	}
 
-	cursor.Close(context.TODO())
+	cursor.Close(context.Background())
 	return
 }

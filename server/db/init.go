@@ -14,7 +14,7 @@ var products mongo.Collection
 var users mongo.Collection
 
 func init() {
-	client, _ := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, _ := mongo.Connect(context.Background(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	db := client.Database("banking-spa-testing")
 	paymentsFromCard = *db.Collection("payments-from-card")
 	paymentRequests = *db.Collection("payment-requests")

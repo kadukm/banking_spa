@@ -12,26 +12,26 @@ import (
 func GetPaymentRequestsSorted(c *gin.Context) {
 	sortOptions := utils.MongoSortDTO{}
 	if err := c.ShouldBindQuery(&sortOptions); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if payments, err := db.GetPaymentRequestsSorted(sortOptions); err == nil {
 		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
 	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно получить платеж"})
 	}
 }
 
 func GetPaymentRequests(c *gin.Context) {
 	filter := utils.MongoFilterDTO{}
 	if err := c.ShouldBindQuery(&filter); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if payments, err := db.GetPaymentRequests(filter); err == nil {
 		c.JSON(http.StatusOK, utils.ServerResponse{Ok: true, Result: payments})
 	} else {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно получить платеж"})
 	}
 }
 
@@ -42,7 +42,7 @@ func PostPaymentRequest(c *gin.Context) {
 	}
 	request := utils.PaymentRequestDTO{}
 	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Запрос некорректен"})
 		return
 	}
 	if !paymentRequestIsRight(request) {
@@ -50,7 +50,7 @@ func PostPaymentRequest(c *gin.Context) {
 		return
 	}
 	if err := db.AddNewPaymentRequest(request); err != nil {
-		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: err.Error()})
+		c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Невозможно добавить платеж"})
 		return
 	}
 

@@ -12,12 +12,12 @@ func GetProducts(companyID string, maxCount int64) (res []*utils.ProductDTO, err
 	filter := bson.M{"company_id": companyID}
 	findOptions := options.Find().SetLimit(maxCount)
 
-	cursor, err := products.Find(context.TODO(), filter, findOptions)
+	cursor, err := products.Find(context.Background(), filter, findOptions)
 	if err != nil {
 		return nil, err
 	}
 
-	for cursor.Next(context.TODO()) {
+	for cursor.Next(context.Background()) {
 		var curProduct product
 		err = cursor.Decode(&curProduct)
 		if err != nil {
@@ -31,6 +31,6 @@ func GetProducts(companyID string, maxCount int64) (res []*utils.ProductDTO, err
 		return nil, err
 	}
 
-	cursor.Close(context.TODO())
+	cursor.Close(context.Background())
 	return
 }
