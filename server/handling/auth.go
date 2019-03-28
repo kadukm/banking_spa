@@ -55,16 +55,20 @@ func Login(c *gin.Context) {
 }
 
 func CheckSession(c *gin.Context) {
-	if sid, err := c.Cookie(sidName); err == nil {
-		login := sid2login[sid]
-		user, err := db.GetUser(login)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Incorrect CSRF-token"})
-		}
-		if user.Role != "admin" {
-			c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Access denie"})
-		}
+	needRedirect := false
+	if sid, err := c.Cookie(sidName); err != nil {
+		needRedirect = true
+	} else if login, ok := sid2login[sid]; !ok {
+		needRedirect = true
+	} else if user, err := db.GetUser(login); err != nil {
+		needRedirect = true
+	} else if user.Role != "admin" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ServerResponse{Ok: false, Result: "Access denied"})
 	} else {
+		// then session is ok
+	}
+
+	if needRedirect {
 		c.Redirect(http.StatusTemporaryRedirect, "/login")
 		c.Abort()
 	}
