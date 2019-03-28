@@ -1,4 +1,4 @@
-const ndsValues = ["НДС 18%", "НДС 10%", "без НДС"]
+const ndsValues = [/НДС 18%/g, /НДС 10%/g, /без НДС/g]
 
 export const csrfTokenName = "X-CSRF-TOKEN"
 
@@ -33,7 +33,7 @@ export function handleNds(currentNdsValue, inputValue) {
     }
     newInputValue = newInputValue.replace(/ $/, "")
     newInputValue = newInputValue + ' ' + currentNdsValue
-    return newInputValue.replace(/^ /, "")
+    return newInputValue.replace(/^ +/, "")
 }
 
 export function prepareInn(value) {
