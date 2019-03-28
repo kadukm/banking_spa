@@ -48,7 +48,7 @@
 }
 
 .pay-card__card input {
-    background-color: #cccccc00;
+    background-color: transparent;
     border-width: 0 0 2px 0;
     border-color: grey;
 }
