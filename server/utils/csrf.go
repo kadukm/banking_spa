@@ -10,7 +10,7 @@ import (
 const (
 	CSRFTokenName  = "X-CSRF-TOKEN"
 	tokenLength    = 64
-	allowedLetters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+	allowedLetters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_1234567890"
 )
 
 func CSRFGeneration(c *gin.Context) {
