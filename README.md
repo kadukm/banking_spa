@@ -8,8 +8,14 @@ Simple single-page application written on Golang+MongoDB+React
 - [ ] Move font-files to another directory
 - [ ] Add swagger
 - [ ] Return payments in admin-panel by different pages
+- [ ] Add description for all exported objects
 
-## backend API
+## Database schema
+You can find info about database in files:
+- `./server/db/init.go` - database' and collections' names
+- `./server/db/structs.go` - collections' description
+
+## Backend API
 POST `/api/payments/from_card`
 ```
 {
