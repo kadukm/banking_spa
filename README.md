@@ -1,6 +1,12 @@
 # banking_spa
 Simple single-page application written on Golang+MongoDB+React
 
+#### How to run
+```
+npm run build
+go run main.go
+```
+
 ## TODO
 - [ ] Send request to payment via bank using GET-form, not fetch
 - [ ] Add vendoring
