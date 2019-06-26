@@ -15,6 +15,7 @@ go run main.go
 - [ ] Add swagger
 - [ ] Return payments in admin-panel by different pages
 - [ ] Add description for all exported objects
+- [ ] Work with SIDs thread safe
 
 ## Database schema
 You can find info about database in files:
